@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 /* eslint-disable no-ternary */
 const SupportItem = ({ item, endItem }) => {
   const severityHigh = item?.severity === 'high' ? 'Høy' : null

@@ -10,7 +10,7 @@ export default function oneSupportElement() {
   const { id } = router.query
 
   const [supportElement, setSupportElement] = useState({
-    id: { id },
+    id: id,
     title: 'Test',
     creator: 'Aleksander Ranum',
     description: 'Dette er bare en test',
@@ -20,14 +20,13 @@ export default function oneSupportElement() {
     createdAt: new Date(2021, 11, 22).toLocaleDateString(),
   })
 
-  const getSuuportElement = async () => {
+  const getSuportElement = async () => {
     try {
       const response = await axios.get('../api/hello', {
         params: {
-          id: { id },
+          id: id,
         },
       })
-      console.log(response.data)
 
       const data = response?.data
 
@@ -38,11 +37,12 @@ export default function oneSupportElement() {
   }
 
   useEffect(() => {
-    getSuuportElement()
+    getSuportElement()
   }, [])
 
   return (
     <Layout>
+      <p>{id}</p>
       <SupportItem item={supportElement} />
     </Layout>
   )

@@ -63,9 +63,12 @@ export default function Home() {
   }, [importance, department, issues])
 
   const endItem = async (id) => {
-    // TODO: Update in DB
     try {
-      const response = await axios.delete('../api/hello')
+      const response = await axios.delete('../api/hello', {
+        params: {
+          id: id
+        }
+      })
 
       if (response.data.success) {
         //setIssues(response.data.issues)

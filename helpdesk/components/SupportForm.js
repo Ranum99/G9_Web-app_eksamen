@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState } from 'react'
 
 import Dropdown from './dropdown'
@@ -73,11 +74,21 @@ const SupportForm = () => {
     return noErrors
   }
 
-  const handleSendSupport = (event) => {
+  const handleSendSupport = async (event) => {
     event.preventDefault()
 
     if (inputCheck()) {
-      console.log('Sender inn til check backend')
+      try {
+        const response = await axios.post('../api/hello', {
+          params: {
+            ...form
+          },
+        })
+
+        console.log(response);
+      } catch(error) {
+        console.log(error);
+      }
     }
   }
 
