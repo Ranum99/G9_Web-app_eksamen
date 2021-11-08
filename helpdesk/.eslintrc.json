@@ -1,6 +1,7 @@
 {
   "root": true,
   "extends": [
+    ["next/babel"],
     "airbnb-base",
     "next",
     "next/core-web-vitals",
@@ -105,7 +106,8 @@
         ["@/pages", "./pages"],
         ["@/lib", "./lib"],
         ["@/hooks", "./hooks"],
-        ["@/features", "./features"]
+        ["@/features", "./features"],
+        ["@/api", "./api"]
       ]
     }
   }
