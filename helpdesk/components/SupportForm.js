@@ -5,7 +5,7 @@ import Dropdown from './dropdown'
 const importance = [
   { value: 'low', name: 'Lav' },
   { value: 'medium', name: 'Medium' },
-  { value: 'heigh', name: 'Høy' },
+  { value: 'high', name: 'Høy' },
 ]
 
 const departments = [

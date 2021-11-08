@@ -1,6 +1,10 @@
-export default function Dropdown({ name, handleInputOnChange, options }) {
+export default function Dropdown({ name, setValue, options }) {
+  const meme = (evt) => {
+    console.log(evt.currentTarget.value)
+  }
+
   return (
-    <select onChange={handleInputOnChange} name={name}>
+    <select name={name} onChange={setValue}>
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.name}
