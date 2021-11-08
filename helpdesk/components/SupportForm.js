@@ -36,7 +36,7 @@ const SupportForm = () => {
     let newErrors = { title: '', description: '', creator: '' }
 
     // Checking if title's length is between 25 and 150 char
-    const titleRegex = new RegExp('^[a-z0-9_-]{25,150}$')
+    const titleRegex = new RegExp('^[a-zA-Z0-9\\s_-]{25,150}$')
     if (!titleRegex.test(form.title)) {
       newErrors = {
         ...newErrors,
