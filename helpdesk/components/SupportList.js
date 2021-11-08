@@ -15,7 +15,12 @@ const departments = [
   { value: 'salg', name: 'Salg' },
 ]
 
-const SupportList = ({ handleImportance, handleDepartment, issues }) => {
+const SupportList = ({
+  handleImportance,
+  handleDepartment,
+  issues,
+  endItem,
+}) => {
   return (
     <section className="issues">
       <h2>Henvendelser</h2>
@@ -31,7 +36,7 @@ const SupportList = ({ handleImportance, handleDepartment, issues }) => {
       />
       <ul>
         {issues?.map((issue) => (
-          <SupportItem key={issue.id} item={issue} />
+          <SupportItem key={issue.id} item={issue} endItem={endItem} />
         ))}
       </ul>
     </section>

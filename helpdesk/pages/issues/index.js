@@ -1,6 +1,7 @@
 import SupportList from '@/components/SupportList'
 import Layout from '@/components/layout'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function Home() {
   const [importance, setImportance] = useState('')
@@ -46,24 +47,36 @@ export default function Home() {
   useEffect(() => {
     let newIssues
     if (importance && department) {
-      console.log(1)
       newIssues = issues?.filter(
         (issue) =>
           issue.severity === importance && issue.department === department
       )
     } else if (importance) {
-      console.log(2)
       newIssues = issues?.filter((issue) => issue.severity === importance)
     } else if (department) {
-      console.log(3)
       newIssues = issues?.filter((issue) => issue.department === department)
     } else {
-      console.log(4)
       newIssues = issues
     }
 
     setShowingIssues(newIssues)
-  }, [importance, department])
+  }, [importance, department, issues])
+
+  const endItem = async (id) => {
+    // TODO: Update in DB
+    try {
+      const response = await axios.delete('../api/hello')
+
+      if (response.data.success) {
+        //setIssues(response.data.issues)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+    //setIssues(newIssues);
+    console.log(id)
+  }
 
   const handleImportance = (evt) => {
     setImportance(evt.currentTarget.value)
@@ -78,6 +91,7 @@ export default function Home() {
         handleImportance={handleImportance}
         handleDepartment={handleDepartment}
         issues={showingIssues}
+        endItem={endItem}
       />
     </Layout>
   )

@@ -1,8 +1,15 @@
+import axios from 'axios'
+
 /* eslint-disable no-ternary */
-const SupportItem = ({ item }) => {
+const SupportItem = ({ item, endItem }) => {
   const severityHigh = item?.severity === 'high' ? 'Høy' : null
   const severityMedium = item?.severity === 'medium' ? 'Medium' : null
   const severityLow = item?.severity === 'low' ? 'Lav' : null
+
+  const handleEndButton = () => {
+    endItem(item.id)
+    //console.log(item.id)
+  }
 
   return (
     <li className="issue">
@@ -20,7 +27,9 @@ const SupportItem = ({ item }) => {
         <div className="issue_actions">
           <button type="button">Se kommentarer (2)</button>
           <button type="button">Legg til kommentar</button>
-          <button type="button">Avslutt</button>
+          <button type="button" onClick={handleEndButton}>
+            Avslutt
+          </button>
         </div>
       </footer>
     </li>
