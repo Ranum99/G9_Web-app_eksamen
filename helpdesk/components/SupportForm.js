@@ -1,4 +1,17 @@
 import { useState } from 'react'
+import Dropdown from './dropdown'
+
+const viktigheter = [
+  { value: 1, name: 'Lav' },
+  { value: 2, name: 'Medium' },
+  { value: 3, name: 'Høy' },
+]
+
+const avdelinger = [
+  { value: 1, name: 'IT' },
+  { value: 2, name: 'Design' },
+  { value: 3, name: 'Salg' },
+]
 
 const SupportForm = () => {
   const [form, setForm] = useState({
@@ -48,8 +61,8 @@ const SupportForm = () => {
           value={form.description}
         />
       </div>
-      <div>{/* TODO Add department */}</div>
-      <div>{/* TODO Add severity */}</div>
+      <Dropdown name="viktighet" options={viktigheter} />
+      <Dropdown name="avdeling" options={avdelinger} />
       <button type="sumbit">Send henvendelse</button>
     </form>
   )
