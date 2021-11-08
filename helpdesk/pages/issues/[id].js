@@ -7,7 +7,7 @@ import SupportItem from '@/components/SupportItem'
 
 export default function oneSupportElement() {
   const router = useRouter()
-  const { id } = router.query
+  const id = router.query.id
 
   const [supportElement, setSupportElement] = useState({
     id: id,
@@ -31,19 +31,38 @@ export default function oneSupportElement() {
       const data = response?.data
 
       //setSupportElement(data)
+      setSupportElement({...supportElement, id: id})
     } catch (error) {
       console.log(error)
     }
   }
 
+  const endItem = async (id) => {
+    try {
+      const response = await axios.delete('../api/hello', {
+        params: {
+          id: id
+        }
+      })
+
+      if (response.data.success) {
+        //setIssues(response.data.issues)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+
+    //setIssues(newIssues);
+  }
+
   useEffect(() => {
     getSuportElement()
-  }, [])
+  }, [id])
 
   return (
     <Layout>
-      <p>{id}</p>
-      <SupportItem item={supportElement} />
+      <p>{JSON.stringify(supportElement)}</p>
+      <SupportItem item={supportElement} endItem={endItem} />
     </Layout>
   )
 }

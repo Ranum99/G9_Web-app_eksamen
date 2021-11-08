@@ -6,7 +6,6 @@ const SupportItem = ({ item, endItem }) => {
 
   const handleEndButton = () => {
     endItem(item.id)
-    //console.log(item.id)
   }
 
   return (
