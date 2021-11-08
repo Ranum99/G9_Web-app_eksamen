@@ -3,8 +3,8 @@ import Layout from '@/components/layout'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
-  const [importance, setImportance] = useState('low')
-  const [department, setDepartment] = useState('it')
+  const [importance, setImportance] = useState('')
+  const [department, setDepartment] = useState('')
 
   const [issues, setIssues] = useState([
     {
@@ -41,20 +41,26 @@ export default function Home() {
       createdAt: new Date(2021, 10, 12).toLocaleDateString(),
     },
   ])
-  const [showingIssues, setShowingIssues] = useState([])
+  const [showingIssues, setShowingIssues] = useState()
 
   useEffect(() => {
     let newIssues
-    if (importance && department)
+    if (importance && department) {
+      console.log(1)
       newIssues = issues?.filter(
         (issue) =>
           issue.severity === importance && issue.department === department
       )
-    else if (importance)
+    } else if (importance) {
+      console.log(2)
       newIssues = issues?.filter((issue) => issue.severity === importance)
-    else if (department)
+    } else if (department) {
+      console.log(3)
       newIssues = issues?.filter((issue) => issue.department === department)
-    else newIssues = issues
+    } else {
+      console.log(4)
+      newIssues = issues
+    }
 
     setShowingIssues(newIssues)
   }, [importance, department])
