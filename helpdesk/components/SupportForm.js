@@ -1,16 +1,17 @@
 import { useState } from 'react'
+
 import Dropdown from './dropdown'
 
-const viktigheter = [
-  { value: 1, name: 'Lav' },
-  { value: 2, name: 'Medium' },
-  { value: 3, name: 'Høy' },
+const importance = [
+  { value: 'low', name: 'Lav' },
+  { value: 'medium', name: 'Medium' },
+  { value: 'heigh', name: 'Høy' },
 ]
 
-const avdelinger = [
-  { value: 1, name: 'IT' },
-  { value: 2, name: 'Design' },
-  { value: 3, name: 'Salg' },
+const departments = [
+  { value: 'it', name: 'IT' },
+  { value: 'design', name: 'Design' },
+  { value: 'salg', name: 'Salg' },
 ]
 
 const SupportForm = () => {
@@ -18,6 +19,8 @@ const SupportForm = () => {
     title: '',
     creator: '',
     description: '',
+    importance: 'low',
+    department: 'it',
   })
 
   const handleInputOnChange = ({ currentTarget: { name, value } }) =>
@@ -61,8 +64,16 @@ const SupportForm = () => {
           value={form.description}
         />
       </div>
-      <Dropdown name="viktighet" options={viktigheter} />
-      <Dropdown name="avdeling" options={avdelinger} />
+      <Dropdown
+        name="importance"
+        handleInputOnChange={handleInputOnChange}
+        options={importance}
+      />
+      <Dropdown
+        name="department"
+        handleInputOnChange={handleInputOnChange}
+        options={departments}
+      />
       <button type="sumbit">Send henvendelse</button>
     </form>
   )

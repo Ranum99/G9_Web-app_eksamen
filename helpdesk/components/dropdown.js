@@ -1,8 +1,10 @@
-export default function Dropdown({ name, options }) {
+export default function Dropdown({ name, handleInputOnChange, options }) {
   return (
-    <select name={name}>
+    <select onChange={handleInputOnChange} name={name}>
       {options.map((option) => (
-        <option value={option.value}>{option.name}</option>
+        <option key={option.value} value={option.value}>
+          {option.name}
+        </option>
       ))}
     </select>
   )

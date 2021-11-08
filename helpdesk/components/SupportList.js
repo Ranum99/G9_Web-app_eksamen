@@ -1,24 +1,24 @@
-import SupportItem from './SupportItem'
 import Dropdown from './dropdown'
+import SupportItem from './SupportItem'
 
-const viktigheter = [
-  { value: 1, name: 'Lav' },
-  { value: 2, name: 'Medium' },
-  { value: 3, name: 'Høy' },
+const importance = [
+  { value: 'low', name: 'Lav' },
+  { value: 'medium', name: 'Medium' },
+  { value: 'heigh', name: 'Høy' },
 ]
 
-const avdelinger = [
-  { value: 1, name: 'IT' },
-  { value: 2, name: 'Design' },
-  { value: 3, name: 'Salg' },
+const departments = [
+  { value: 'it', name: 'IT' },
+  { value: 'design', name: 'Design' },
+  { value: 'salg', name: 'Salg' },
 ]
 
 const SupportList = ({ issues }) => {
   return (
     <section className="issues">
       <h2>Henvendelser</h2>
-      <Dropdown name="viktighet" options={viktigheter} />
-      <Dropdown name="avdeling" options={avdelinger} />
+      <Dropdown name="importance" options={importance} />
+      <Dropdown name="department" options={departments} />
       <ul>
         {issues?.map((issue) => (
           <SupportItem key={issue.id} item={issue} />
