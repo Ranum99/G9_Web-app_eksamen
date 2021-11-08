@@ -1,11 +1,10 @@
-import Navigation from '@/components/navigation'
+import Layout from '@/components/layout'
 import SupportForm from '@/components/SupportForm'
 
 export default function Home() {
   return (
-    <main>
-      <Navigation />
+    <Layout>
       <SupportForm />
-    </main>
+    </Layout>
   )
 }

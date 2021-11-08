@@ -1,10 +1,9 @@
-import Navigation from '@/components/navigation'
 import SupportList from '@/components/SupportList'
+import Layout from '@/components/layout'
 
 export default function Home() {
   return (
-    <main>
-      <Navigation />
+    <Layout>
       <SupportList
         issues={[
           {
@@ -42,6 +41,6 @@ export default function Home() {
           },
         ]}
       />
-    </main>
+    </Layout>
   )
 }
