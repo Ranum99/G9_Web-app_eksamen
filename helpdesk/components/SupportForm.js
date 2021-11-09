@@ -79,13 +79,14 @@ const SupportForm = () => {
 
     if (inputCheck()) {
       try {
-        const response = await axios.post('../api/hello', {
+        //console.log(form);
+        const response = await axios.post('../api/issues/', {
           params: {
-            ...form
+            form
           },
         })
 
-        console.log(response);
+        console.log(response.data);
       } catch(error) {
         console.log(error);
       }
