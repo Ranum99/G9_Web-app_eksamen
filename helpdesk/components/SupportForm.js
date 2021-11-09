@@ -4,9 +4,9 @@ import { useState } from 'react'
 import Dropdown from './dropdown'
 
 const importance = [
-  { value: 'low', name: 'Lav' },
-  { value: 'medium', name: 'Medium' },
-  { value: 'high', name: 'Høy' },
+  { value: '1', name: 'Lav' },
+  { value: '2', name: 'Medium' },
+  { value: '3', name: 'Høy' },
 ]
 
 const departments = [
