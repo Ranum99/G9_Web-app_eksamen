@@ -87,9 +87,9 @@ async function main() {
   console.log('Start seeding ...')
   // Kalle på seed funksjoner
 
-  await prisma.department.deleteMany({})
-  await prisma.issue.deleteMany({})
   await prisma.comment.deleteMany({})
+  await prisma.issue.deleteMany({})
+  await prisma.department.deleteMany({})
 
 
   //await createDepartments();
