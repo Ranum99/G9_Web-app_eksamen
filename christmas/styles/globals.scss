@@ -29,4 +29,26 @@ body {
   right: 25px;
 }
 
+main {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 
+article {
+	// Lager kanten
+	border: 1px solid lightgray;
+	border-radius: 10px;
+	padding: 50px;
+	margin: 5px;
+
+	// Tekst
+	text-align: center;
+}
+
+.notAvalibalie {
+	background-color: whitesmoke;
+}
+
+.active {
+	background-color: lightgreen;
+}
