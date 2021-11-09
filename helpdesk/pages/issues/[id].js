@@ -53,6 +53,7 @@ export default function oneSupportElement() {
     }
 
     //setIssues(newIssues);
+    console.log(id)
   }
 
   useEffect(() => {
