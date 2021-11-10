@@ -37,7 +37,7 @@ export default function Home() {
 
       setIssues(response.data.data)
     } catch(error) {
-      console.log("OPSI WOPSI");
+      console.log(error);
     }
   }
 
