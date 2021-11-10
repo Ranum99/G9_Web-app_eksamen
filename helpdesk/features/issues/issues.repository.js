@@ -1,6 +1,7 @@
 import prisma from "@/lib/clients/db";
 
 export const create = async (issueData) => {
+  console.log(issueData);
   try {
     const newIssue = await prisma.issue.create({ data: issueData })
 

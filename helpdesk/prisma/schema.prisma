@@ -21,7 +21,7 @@ model Comment {
 
 model Issue {
   id              String      @id @default(cuid())
-  isResolved      Boolean
+  isResolved      Boolean     @default(false)
   title           String
   description     String
   creator         String
@@ -33,7 +33,7 @@ model Issue {
 }
 
 model Department {
-  id              String      @id @default(cuid())
+  id              String      @id
   name            String
   created_at      DateTime
   issues          Issue[]

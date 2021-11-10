@@ -4,9 +4,9 @@ const prisma = new PrismaClient()
 
 // Dummydata
 const departments = [
-  {name: "IT", created_at: new Date('2021-11-09')},
-  {name: "Design", created_at: new Date('2021-11-09')},
-  {name: "Salg", created_at: new Date('2021-11-09')}
+  {id: "it", name: "IT", created_at: new Date('2021-11-09')},
+  {id: "design", name: "Design", created_at: new Date('2021-11-09')},
+  {id: "salg", name: "Salg", created_at: new Date('2021-11-09')}
 ]
 
 const issues = [

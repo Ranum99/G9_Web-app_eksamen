@@ -10,7 +10,7 @@ CREATE TABLE "Comment" (
 -- CreateTable
 CREATE TABLE "Issue" (
     "id" TEXT NOT NULL PRIMARY KEY,
-    "isResolved" BOOLEAN NOT NULL,
+    "isResolved" BOOLEAN NOT NULL DEFAULT false,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "creator" TEXT NOT NULL,

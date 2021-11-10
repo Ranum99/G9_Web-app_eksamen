@@ -81,7 +81,6 @@ const SupportForm = () => {
       try {
         //console.log(form);
         const response = await axios.post('../api/issues/', {
-          isResolved: false,
           title: form.title,
           description: form.description,
           creator: form.creator,
