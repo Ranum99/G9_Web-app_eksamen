@@ -11,3 +11,13 @@ export const create = async (issueData) => {
     return { success: false, error: 'En feil har oppstått' }
   }
 }
+
+export const findMany = async () => {
+  try {
+    const issues = await prisma.issue.findMany()
+
+    return { success: true, data: issues }
+  } catch(error) {
+    return { success: false, error: 'En feil har oppstått' }
+  }
+}

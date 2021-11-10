@@ -46,3 +46,12 @@ export const createIssue = async (req, res) => {
   // Returning 201 (Created)
   return res.status(201).json({success: true, data: createdIssue.data})
 }
+
+export const listIssues = async (req, res) => {
+  const issues = await issuesService.list()
+
+  if(!issues.success)
+    return res.status(500).json({ success: false, error: issues.error })
+
+  return res.status(200).json({ success: true, data: issues.data })
+}

@@ -7,41 +7,7 @@ export default function Home() {
   const [importance, setImportance] = useState('')
   const [department, setDepartment] = useState('')
 
-  const [issues, setIssues] = useState([
-    {
-      id: 1,
-      title: 'Title one',
-      creator: 'Marius Wallin',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non neque diam. Nam placerat nunc id vulputate pretium. In ac metus sit amet augue suscipit ornare.',
-      department: 'salg',
-      severity: 'low',
-      isResolved: false,
-      createdAt: new Date(2021, 11, 22).toLocaleDateString(),
-    },
-    {
-      id: 2,
-      title: 'Title two',
-      creator: 'Simen Simensen',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non neque diam. Nam placerat nunc id vulputate pretium. In ac metus sit amet augue suscipit ornare.',
-      department: 'it',
-      severity: 'medium',
-      isResolved: false,
-      createdAt: new Date(2021, 11, 6).toLocaleDateString(),
-    },
-    {
-      id: 3,
-      title: 'Title three',
-      creator: 'Trude Trudesen',
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non neque diam. Nam placerat nunc id vulputate pretium. In ac metus sit amet augue suscipit ornare.',
-      department: 'design',
-      severity: 'high',
-      isResolved: false,
-      createdAt: new Date(2021, 10, 12).toLocaleDateString(),
-    },
-  ])
+  const [issues, setIssues] = useState([])
   const [showingIssues, setShowingIssues] = useState()
 
   useEffect(() => {
@@ -62,9 +28,26 @@ export default function Home() {
     setShowingIssues(newIssues)
   }, [importance, department, issues])
 
+
+  const getIssues = async () => {
+    try {
+      const response = await axios.get('../api/issues');
+
+      console.log(response.data.data);
+
+      setIssues(response.data.data)
+    } catch(error) {
+      console.log("OPSI WOPSI");
+    }
+  }
+
+  useEffect(() => {
+    getIssues()
+  }, [])
+
   const endItem = async (id) => {
     try {
-      const response = await axios.delete('../api/hello', {
+      const response = await axios.put('../api/hello', {
         params: {
           id: id
         }

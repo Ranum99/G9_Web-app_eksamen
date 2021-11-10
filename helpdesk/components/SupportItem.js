@@ -1,8 +1,8 @@
 /* eslint-disable no-ternary */
 const SupportItem = ({ item, endItem }) => {
-  const severityHigh = item?.severity === 'high' ? 'Høy' : null
-  const severityMedium = item?.severity === 'medium' ? 'Medium' : null
-  const severityLow = item?.severity === 'low' ? 'Lav' : null
+  const severityHigh = item?.severity === 3 ? 'Høy' : null
+  const severityMedium = item?.severity === 2 ? 'Medium' : null
+  const severityLow = item?.severity === 1 ? 'Lav' : null
 
   const handleEndButton = () => {
     endItem(item.id)
