@@ -23,3 +23,12 @@ export const list = async () => {
 
   return { success: true, data: issues.data } 
 }
+
+export const listOne = async ( id ) => {
+  const issue = await issueRepo.findOne(id);
+
+  if(!issue.success)
+    return { success: false, error: issue.error }
+
+  return { success: true, data: issue.data } 
+}

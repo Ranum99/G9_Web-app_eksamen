@@ -7,9 +7,6 @@ export default async function handler(req, res) {
     case 'post':
       await commentsController.createComment(req, res);
       break;
-    case 'get':
-      await commentsController.listComments(req, res);
-      break;
     default: 
       res.status(405).end();
   }

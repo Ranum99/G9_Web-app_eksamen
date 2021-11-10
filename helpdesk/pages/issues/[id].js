@@ -9,29 +9,15 @@ export default function oneSupportElement() {
   const router = useRouter()
   const id = router.query.id
 
-  const [supportElement, setSupportElement] = useState({
-    id: id,
-    title: 'Test',
-    creator: 'Aleksander Ranum',
-    description: 'Dette er bare en test',
-    department: 'Salg',
-    severity: 'high',
-    isResolved: false,
-    createdAt: new Date(2021, 11, 22).toLocaleDateString(),
-  })
+  const [supportElement, setSupportElement] = useState({})
 
   const getSuportElement = async () => {
     try {
-      const response = await axios.get('../api/hello', {
-        params: {
-          id: id,
-        },
-      })
+      const response = await axios.get(`../api/issues/${id}`)
 
-      const data = response?.data
+      const data = response
 
-      //setSupportElement(data)
-      setSupportElement({...supportElement, id: id})
+      setSupportElement(data?.data?.data)
     } catch (error) {
       console.log(error)
     }
@@ -57,7 +43,8 @@ export default function oneSupportElement() {
   }
 
   useEffect(() => {
-    getSuportElement()
+    if(id)
+      getSuportElement()
   }, [id])
 
   return (

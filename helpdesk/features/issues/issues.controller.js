@@ -47,6 +47,7 @@ export const createIssue = async (req, res) => {
   return res.status(201).json({success: true, data: createdIssue.data})
 }
 
+// Will list all issues
 export const listIssues = async (req, res) => {
   const issues = await issuesService.list()
 
@@ -54,4 +55,16 @@ export const listIssues = async (req, res) => {
     return res.status(500).json({ success: false, error: issues.error })
 
   return res.status(200).json({ success: true, data: issues.data })
+}
+
+// Will list one issue with id X
+export const listIssue = async (req, res) => {
+  const { id } = req.query;
+
+  const issue = await issuesService.listOne(id);
+
+  if(!issue.success)
+    return res.status(500).json({ success: false, error: issue.data })
+
+  return res.status(200).json({ success: true, data: issue.data })
 }
