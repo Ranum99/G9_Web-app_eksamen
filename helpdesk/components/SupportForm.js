@@ -29,8 +29,10 @@ const SupportForm = () => {
     department: 'it',
   })
 
-  const handleInputOnChange = ({ currentTarget: { name, value } }) =>
+  const handleInputOnChange = ({ currentTarget: { name, value } }) => {
     setForm((state) => ({ ...state, [name]: value }))
+    console.log(name, value);
+  }
 
   const inputCheck = () => {
     let noErrors = true
@@ -84,7 +86,7 @@ const SupportForm = () => {
           title: form.title,
           description: form.description,
           creator: form.creator,
-          severity: form.importance,
+          severity: parseInt(form.importance),
           created_at: new Date(),
           department_id: form.department
         })

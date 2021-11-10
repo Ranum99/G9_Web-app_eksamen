@@ -25,6 +25,8 @@ export default function Home() {
       newIssues = issues
     }
 
+    issues.map(issue => {console.log(issue.severity, importance);})
+
     setShowingIssues(newIssues)
   }, [importance, department, issues])
 
@@ -33,7 +35,7 @@ export default function Home() {
     try {
       const response = await axios.get('../api/issues');
 
-      //console.log(response.data.data);
+      console.log(response.data.data);
 
       setIssues(response.data.data)
     } catch(error) {
@@ -64,18 +66,23 @@ export default function Home() {
     console.log(id)
   }
 
-  const handleImportance = (evt) => {
-    setImportance(evt.currentTarget.value)
-  }
-  const handleDepartment = (evt) => {
-    setDepartment(evt.currentTarget.value)
+  const handleInputOnChange = ({ currentTarget: { name, value } }) => {
+    switch (name.toLowerCase()) {
+      case 'importance': 
+        setImportance(value)
+        break
+      case 'department':
+        setDepartment(value)
+        break
+      default:
+        break
+    }
   }
 
   return (
     <Layout>
       <SupportList
-        handleImportance={handleImportance}
-        handleDepartment={handleDepartment}
+        handleInputOnChange={handleInputOnChange}
         issues={showingIssues}
         endItem={endItem}
       />

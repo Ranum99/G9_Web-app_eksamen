@@ -16,8 +16,7 @@ const departments = [
 ]
 
 const SupportList = ({
-  handleImportance,
-  handleDepartment,
+  handleInputOnChange,
   issues,
   endItem,
 }) => {
@@ -26,12 +25,12 @@ const SupportList = ({
       <h2>Henvendelser</h2>
       <Dropdown
         name="importance"
-        setValue={handleImportance}
+        handleInputOnChange={handleInputOnChange}
         options={importance}
       />
       <Dropdown
         name="department"
-        setValue={handleDepartment}
+        handleInputOnChange={handleInputOnChange}
         options={departments}
       />
       <ul>
