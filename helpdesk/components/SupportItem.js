@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Link from "next/link"
 import SupportItemComment from "./SupportItemComment"
 import SupportItemMakeComment from "./SupportItemMakeComment"
 
@@ -23,9 +24,6 @@ const SupportItem = ({ item, endItem }) => {
 
   const seeComments = (evt) => {
     setShowComment(!showComments)
-    item?.comments?.map(comment => {
-      console.log(comment);
-    })
   }
 
   return (
@@ -35,11 +33,15 @@ const SupportItem = ({ item, endItem }) => {
           <span>{item?.department?.name}</span>
           <span>{severityHigh ?? severityMedium ?? severityLow}</span>
         </div>
-        <h3>
-          {item?.title} {item?.isResolved ? '(løst)' : null}
-        </h3>
-        <p>{item?.description}</p>
-        <span>{item?.creator}</span>
+        <Link href={`/issues/${item.id}`} passHref>
+          <div>
+            <h3>
+              {item?.title} {item?.isResolved ? '(løst)' : null}
+            </h3>
+            <p>{item?.description}</p>
+            <span>{item?.creator}</span>
+          </div>
+        </Link>
         <footer>
           <span>{item?.createdAt}</span>
           <div className="issue_actions">
