@@ -18,6 +18,7 @@ const SupportItem = ({ item, endItem }) => {
   const addComment = (evt) =>  {
     setShowAddComment(!showAddComment)
     console.log("BIP BOOP COMMENTS IN MAKING");
+    console.log(item);
   }
 
   const seeComments = (evt) => {
@@ -31,7 +32,7 @@ const SupportItem = ({ item, endItem }) => {
     <>
       <li className="issue">
         <div className="meta">
-          <span>{item?.department.name}</span>
+          <span>{item?.department?.name}</span>
           <span>{severityHigh ?? severityMedium ?? severityLow}</span>
         </div>
         <h3>
@@ -42,7 +43,7 @@ const SupportItem = ({ item, endItem }) => {
         <footer>
           <span>{item?.createdAt}</span>
           <div className="issue_actions">
-            <button type="button" onClick={seeComments}>Se kommentarer ({item?.comments.length})</button>
+            <button type="button" onClick={seeComments}>Se kommentarer ({item?.comments?.length ?? 0})</button>
             <button type="button" onClick={addComment}>Legg til kommentar</button>
             <button type="button" onClick={handleEndButton}>
               Avslutt
