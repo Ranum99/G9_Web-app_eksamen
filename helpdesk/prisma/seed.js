@@ -10,7 +10,7 @@ const departments = [
 ]
 
 const issues = [
-  {isResolved: false, title: "Dette er en veldig fin tittel (SALG 1)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1, created_at: new Date('2021-11-09')},
+  {isResolved: true, title: "Dette er en veldig fin tittel (SALG 1)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1, created_at: new Date('2021-11-09')},
   {isResolved: false, title: "Dette er en veldig fin tittel (SALG 2)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1, created_at: new Date('2021-11-09')},
   {isResolved: false, title: "Dette er en veldig fin tittel (IT 1)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1, created_at: new Date('2021-11-09')},
 ]

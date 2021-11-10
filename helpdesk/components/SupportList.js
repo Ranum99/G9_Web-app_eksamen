@@ -3,9 +3,9 @@ import SupportItem from './SupportItem'
 
 const importance = [
   { value: '', name: 'Select' },
-  { value: '1', name: 'Lav' },
-  { value: '2', name: 'Medium' },
-  { value: '3', name: 'Høy' },
+  { value: 1, name: 'Lav' },
+  { value: 2, name: 'Medium' },
+  { value: 3, name: 'Høy' },
 ]
 
 const departments = [

@@ -11,7 +11,7 @@ const SupportItem = ({ item, endItem }) => {
   return (
     <li className="issue">
       <div className="meta">
-        <span>{item?.department}</span>
+        <span>{item?.department.name}</span>
         <span>{severityHigh ?? severityMedium ?? severityLow}</span>
       </div>
       <h3>
@@ -22,7 +22,7 @@ const SupportItem = ({ item, endItem }) => {
       <footer>
         <span>{item?.createdAt}</span>
         <div className="issue_actions">
-          <button type="button">Se kommentarer (2)</button>
+          <button type="button">Se kommentarer ({item.comments.length})</button>
           <button type="button">Legg til kommentar</button>
           <button type="button" onClick={handleEndButton}>
             Avslutt

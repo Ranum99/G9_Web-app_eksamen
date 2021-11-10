@@ -14,7 +14,12 @@ export const create = async (issueData) => {
 
 export const findMany = async () => {
   try {
-    const issues = await prisma.issue.findMany()
+    const issues = await prisma.issue.findMany({
+      include: {
+        comments: true,
+        department: true
+      }
+    })
 
     return { success: true, data: issues }
   } catch(error) {

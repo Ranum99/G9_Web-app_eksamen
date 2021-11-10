@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function Home() {
-  const [importance, setImportance] = useState('')
-  const [department, setDepartment] = useState('')
+  const [importance, setImportance] = useState(null)
+  const [department, setDepartment] = useState(null)
 
   const [issues, setIssues] = useState([])
   const [showingIssues, setShowingIssues] = useState()
@@ -15,12 +15,12 @@ export default function Home() {
     if (importance && department) {
       newIssues = issues?.filter(
         (issue) =>
-          issue.severity === importance && issue.department === department
+          issue.severity === parseInt(importance) && issue.department.id === department
       )
     } else if (importance) {
-      newIssues = issues?.filter((issue) => issue.severity === importance)
+      newIssues = issues?.filter((issue) => issue.severity === parseInt(importance) )
     } else if (department) {
-      newIssues = issues?.filter((issue) => issue.department === department)
+      newIssues = issues?.filter((issue) => issue.department.id === department)
     } else {
       newIssues = issues
     }
@@ -33,7 +33,7 @@ export default function Home() {
     try {
       const response = await axios.get('../api/issues');
 
-      console.log(response.data.data);
+      //console.log(response.data.data);
 
       setIssues(response.data.data)
     } catch(error) {
