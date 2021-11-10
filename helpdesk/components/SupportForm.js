@@ -4,9 +4,9 @@ import { useState } from 'react'
 import Dropdown from './dropdown'
 
 const importance = [
-  { value: '1', name: 'Lav' },
-  { value: '2', name: 'Medium' },
-  { value: '3', name: 'Høy' },
+  { value: 1, name: 'Lav' },
+  { value: 2, name: 'Medium' },
+  { value: 3, name: 'Høy' },
 ]
 
 const departments = [
@@ -25,7 +25,7 @@ const SupportForm = () => {
     title: '',
     creator: '',
     description: '',
-    importance: 'low',
+    importance: 1,
     department: 'it',
   })
 
@@ -81,9 +81,13 @@ const SupportForm = () => {
       try {
         //console.log(form);
         const response = await axios.post('../api/issues/', {
-          params: {
-            form
-          },
+          isResolved: false,
+          title: form.title,
+          description: form.description,
+          creator: form.creator,
+          severity: form.importance,
+          created_at: new Date(),
+          department_id: form.department
         })
 
         console.log(response.data);

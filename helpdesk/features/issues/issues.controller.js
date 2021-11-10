@@ -25,7 +25,7 @@ const inputCheck = (title, description, creator) => {
 }
 
 export const createIssue = async (req, res) => {
-  const { title, description, creator, severity, department } = req.body
+  const { isResolved, title, description, creator, severity, created_at, department_id } = req.body
 
   const inputIsValid = inputCheck();
 
@@ -35,7 +35,7 @@ export const createIssue = async (req, res) => {
   }
 
   const createdIssue = await issuesService.create({
-    title, description, creator, severity, department
+    isResolved, title, description, creator, severity, created_at, department_id
   })
 
   // If anything happens on server-side

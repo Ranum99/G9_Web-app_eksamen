@@ -2,12 +2,12 @@ import prisma from "@/lib/clients/db";
 
 export const create = async (issueData) => {
   try {
-    const newIssue = await prisma.issue.create({ issueData })
-
-    // TODO: FEILER OVER
+    const newIssue = await prisma.issue.create({ data: issueData })
 
     return { success: true, data: newIssue }
   } catch (error) {
+
+    console.log(error);
     return { success: false, error: 'En feil har oppstått' }
   }
 }

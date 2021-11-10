@@ -1,11 +1,9 @@
 import * as issueRepo from './issues.repository'
 
-export const create = async ({ title, description, creator, severity, department }) => {
+export const create = async ({ isResolved, title, description, creator, severity, created_at, department_id }) => {
   // Shall be no checks here to see if already in DB
 
-  const createdIssue = await issueRepo.create({ title, description, creator, severity, department })
-
-  // TODO: FEILER OVER
+  const createdIssue = await issueRepo.create({ isResolved, title, description, creator, severity, created_at, department_id })
 
   if (!createdIssue.success) {
     return { success: false, error: createdIssue.error }
