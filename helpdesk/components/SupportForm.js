@@ -29,11 +29,10 @@ const SupportForm = () => {
     department: 'it',
   })
 
-  const handleInputOnChange = ({ currentTarget: { name, value } }) => {
+  const handleInputOnChange = ({ currentTarget: { name, value } }) =>
     setForm((state) => ({ ...state, [name]: value }))
-    console.log(name, value);
-  }
 
+  // TODO: denne sjekken skjer også backend. Burde ligge et sted hvor samme sjekk kan brukes både frontend og backend
   const inputCheck = () => {
     let noErrors = true
     let newErrors = { title: '', description: '', creator: '' }
@@ -81,7 +80,6 @@ const SupportForm = () => {
 
     if (inputCheck()) {
       try {
-        //console.log(form);
         const response = await axios.post('../api/issues/', {
           title: form.title,
           description: form.description,
@@ -91,6 +89,9 @@ const SupportForm = () => {
           department_id: form.department
         })
 
+        // TODO: brukeren får en melding om at den ble lagt til
+        // TODO: form blir nullstilt
+
         console.log(response.data);
       } catch(error) {
         console.log(error);
@@ -98,6 +99,7 @@ const SupportForm = () => {
     }
   }
 
+  // Burde lage components ut av formen under
   return (
     <form className="support_form" onSubmit={handleSendSupport}>
       <h2>Ny henvendelse</h2>

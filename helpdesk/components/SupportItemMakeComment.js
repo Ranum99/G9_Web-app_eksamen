@@ -22,9 +22,19 @@ const SupportItemMakeComment = ({ item }) => {
         created_at: new Date()
       })
 
-      console.log(response.data);
+      console.log(response);
+
+      if(!response.data.success) {
+        // TODO: legge til i listen med kommentarer på objektet
+        // TODO: brukeren får en melding om at kommentaren ble lagt til, eller at den nye kommentaren blir highlighted
+        setComment('')
+      } else {
+        // TODO: brukeren får en feilmelding
+      }
+      
     } catch(error) {
       console.log(error);
+      // TODO: brukeren får en feilmelding
     }
   }
 

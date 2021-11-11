@@ -17,15 +17,15 @@ export default function oneSupportElement() {
     try {
       const response = await axios.get(`../api/issues/${id}`)
 
-      const data = response
-
-      setSupportElement(data?.data?.data)
+      setSupportElement(response?.data?.data)
     } catch (error) {
+      // TODO: brukeren får opp en 404 - "Issue ikke funnet", eller bli sendt tilbake til der han kom fra
       console.log(error)
     }
   }
 
   const endItem = async (id) => {
+    // TODO: fikse funksjonalitet backend
     try {
       const response = await axios.delete('../api/hello', {
         params: {
@@ -34,9 +34,12 @@ export default function oneSupportElement() {
       })
 
       if (response.data.success) {
-        //setIssues(response.data.issues)
+        // TODO: sette supportElement sin is_resolved = true
+      } else {
+        // TODO: brukeren får en feilmelding
       }
     } catch (error) {
+      // TODO: brukeren får en feilmelding
       console.log(error)
     }
 
@@ -45,8 +48,12 @@ export default function oneSupportElement() {
   }
 
   useEffect(() => {
-    if(id)
+    // Bare for at den ikke skal hente dersom det ikke er en id
+    if(id) {
       getSuportElement()
+    } else {
+      // TODO: brukeren får opp en 404 - "Issue ikke funnet", eller bli sendt tilbake til der han kom fra
+    }
   }, [id])
 
   return (

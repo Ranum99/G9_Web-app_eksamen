@@ -11,6 +11,8 @@ export default function Home() {
   const [showingIssues, setShowingIssues] = useState()
 
   useEffect(() => {
+    // TODO: føler at denne kan bli gjort på en mye bedre måte
+
     let newIssues
     if (importance && department) {
       newIssues = issues?.filter(
@@ -34,8 +36,11 @@ export default function Home() {
       const response = await axios.get('../api/issues');
 
       //console.log(response.data.data);
-
-      setIssues(response.data.data)
+      if(response.data.success) {
+        setIssues(response.data.data)
+      } else {
+        //TODO: brukeren får en feilmelding
+      }
     } catch(error) {
       console.log(error);
     }
@@ -46,6 +51,7 @@ export default function Home() {
   }, [])
 
   const endItem = async (id) => {
+    // TODO: denne finnes også i [id].js, kan kanskje sette den et sted hvor samme funksjon kan brukes 
     try {
       const response = await axios.put('../api/hello', {
         params: {
@@ -55,6 +61,8 @@ export default function Home() {
 
       if (response.data.success) {
         //setIssues(response.data.issues)
+      } else {
+        // TODO: brukerne får en feilmelding
       }
     } catch (error) {
       console.log(error)
@@ -65,6 +73,7 @@ export default function Home() {
   }
 
   const handleInputOnChange = ({ currentTarget: { name, value } }) => {
+    // TODO: denne kan kanskje gjøres om til et objekt istedenfor, og bruke samme funksjonalitet som i SupportForm.js (i components)
     switch (name.toLowerCase()) {
       case 'importance': 
         setImportance(value)
