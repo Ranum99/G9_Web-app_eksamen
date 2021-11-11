@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
+import Head from 'next/head'
+
 import SupportItem from '@/components/SupportItem'
 
 export default function oneSupportElement() {
@@ -48,9 +50,14 @@ export default function oneSupportElement() {
   }, [id])
 
   return (
-    <Layout>
-      <p>{JSON.stringify(supportElement)}</p>
-      <SupportItem item={supportElement} endItem={endItem} />
-    </Layout>
+    <>
+      <Head>
+        <title>{`${supportElement?.isResolved ? '(Løst)' : null} ${supportElement?.title}`}</title>
+      </Head>
+      <Layout>
+        <p>{JSON.stringify(supportElement)}</p>
+        <SupportItem item={supportElement} endItem={endItem} />
+      </Layout>
+    </>
   )
 }
