@@ -5,12 +5,6 @@ const { useState } = require("react");
 const SupportItemMakeComment = ({ item }) => {
   const [comment, setComment] = useState('')
 
-  const data = {
-    comment: comment,
-    issue_id: item.id,
-    created_at: new Date()
-  }
-
   const handleChange = (evt) => {
     setComment(evt.currentTarget.value)
   }
@@ -19,7 +13,6 @@ const SupportItemMakeComment = ({ item }) => {
     try {
       const response = await axios.post(`../api/comments/${item.id}`, {
         comment: comment,
-        created_at: new Date()
       })
 
       console.log(response);

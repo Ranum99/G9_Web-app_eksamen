@@ -14,7 +14,7 @@ datasource db {
 model Comment {
   id              String      @id @default(cuid())
   comment         String
-  created_at      DateTime
+  created_at      DateTime    @default(now())
   issue           Issue       @relation(fields: [issue_id], references: [id])
   issue_id        String
 }
@@ -26,7 +26,7 @@ model Issue {
   description     String
   creator         String
   severity        Int
-  created_at      DateTime
+  created_at      DateTime    @default(now())
   department      Department  @relation(fields: [department_id], references: [id])
   department_id   String
   comments        Comment[]
@@ -35,6 +35,6 @@ model Issue {
 model Department {
   id              String      @id
   name            String
-  created_at      DateTime
+  created_at      DateTime    @default(now())
   issues          Issue[]
 }

@@ -4,34 +4,22 @@ const prisma = new PrismaClient()
 
 // Dummydata
 const departments = [
-  {id: "it", name: "IT", created_at: new Date('2021-11-09')},
-  {id: "design", name: "Design", created_at: new Date('2021-11-09')},
-  {id: "salg", name: "Salg", created_at: new Date('2021-11-09')}
+  {id: "it", name: "IT"},
+  {id: "design", name: "Design"},
+  {id: "salg", name: "Salg"}
 ]
 
 const issues = [
-  {isResolved: true, title: "Dette er en veldig fin tittel (SALG 1)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1, created_at: new Date('2021-11-09')},
-  {isResolved: false, title: "Dette er en veldig fin tittel (SALG 2)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1, created_at: new Date('2021-11-09')},
-  {isResolved: false, title: "Dette er en veldig fin tittel (IT 1)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1, created_at: new Date('2021-11-09')},
+  {isResolved: true, title: "Dette er en veldig fin tittel (SALG 1)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1},
+  {isResolved: false, title: "Dette er en veldig fin tittel (SALG 2)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1},
+  {isResolved: false, title: "Dette er en veldig fin tittel (IT 1)", description: "En beskrivelse", creator: "Aleksander Ranum", severity: 1},
 ]
 
 const comments = [
-  {comment: "En kommentar til SALG(1) - 1", created_at: new Date('2021-11-09')},
-  {comment: "En kommentar til SALG(2) - 1", created_at: new Date('2021-11-09')},
-  {comment: "En kommentar til IT(1) - 1", created_at: new Date('2021-11-09')}
+  {comment: "En kommentar til SALG(1) - 1"},
+  {comment: "En kommentar til SALG(2) - 1"},
+  {comment: "En kommentar til IT(1) - 1"}
 ]
-
-const createDepartments = async () => {
-  await Promise.all(
-    departments.map(async (department) => {
-      await prisma.department.create({
-        data: {
-          ...department,
-        },
-      })
-    })
-  )
-}
 
 const createDepartmentsWithIssues = async () => {
   await Promise.all(
@@ -55,34 +43,6 @@ const createDepartmentsWithIssues = async () => {
   )
 }
 
-const createIssues = async () => {
-  const issuesPromises = issues.map(async (issue) => {
-    await prisma.issue.create({
-      data: {
-        ...issue,
-      },
-    })
-  })
-
-    // [ Promise { <pending> }, Promise { <pending> } ]
-  console.log(issuesPromises) 
-  await Promise.all(issuesPromises)
-}
-
-const createComments = async () => {
-  const commentsPromises = comments.map(async (comment) => {
-    await prisma.comment.create({
-      data: {
-        ...comment,
-      },
-    })
-  })
-
-    // [ Promise { <pending> }, Promise { <pending> } ]
-  console.log(commentsPromises) 
-  await Promise.all(commentsPromises)
-}
-
 async function main() {
   console.log('Start seeding ...')
   // Kalle på seed funksjoner
@@ -91,10 +51,6 @@ async function main() {
   await prisma.issue.deleteMany({})
   await prisma.department.deleteMany({})
 
-
-  //await createDepartments();
-  //await createIssues();
-  //await createComments();
   await createDepartmentsWithIssues()
   console.log('Seeding finished.')
 }

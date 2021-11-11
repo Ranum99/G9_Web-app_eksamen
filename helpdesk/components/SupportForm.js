@@ -85,7 +85,6 @@ const SupportForm = () => {
           description: form.description,
           creator: form.creator,
           severity: parseInt(form.importance),
-          created_at: new Date(),
           department_id: form.department
         })
 

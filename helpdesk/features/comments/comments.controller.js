@@ -2,10 +2,10 @@ import * as commentsService from '@/features/comments/comments.service'
 
 export const createComment = async (req, res) => {
   const { id } = req.query
-  const { comment, created_at } = req.body
+  const { comment } = req.body
 
   const createdComment = await commentsService.create(
-    comment, id, created_at 
+    comment, id 
   )
 
   if(!createdComment.success) {

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import SupportItemComment from "./SupportItemComment"
 import SupportItemMakeComment from "./SupportItemMakeComment"
@@ -8,6 +8,11 @@ const SupportItem = ({ item, endItem }) => {
   const severityHigh = item?.severity === 3 ? 'Høy' : null
   const severityMedium = item?.severity === 2 ? 'Medium' : null
   const severityLow = item?.severity === 1 ? 'Lav' : null
+  
+  const date = new Date(item?.created_at)
+  const date_format = date.getDate() < 10 ? `0${date.getDate()}`: date.getDate()
+  const month_format = date.getMonth() + 1
+  const year_format = date.getFullYear().toString().substring(2, 4);
 
   const [showComments, setShowComment] = useState(false)
   const [showAddComment, setShowAddComment] = useState(false)
@@ -23,6 +28,10 @@ const SupportItem = ({ item, endItem }) => {
   const seeComments = (evt) => {
     setShowComment(!showComments)
   }
+
+  useEffect(() => {
+    console.log(item?.created_at);
+  }, [])
 
   return (
     <>
@@ -41,7 +50,7 @@ const SupportItem = ({ item, endItem }) => {
           </div>
         </Link>
         <footer>
-          <span>{item?.createdAt}</span>
+          <span>{`${date_format}.${month_format}.${year_format}`}</span>
           <div className="issue_actions">
             <button type="button" onClick={seeComments}>Se kommentarer ({item?.comments?.length ?? 0})</button>
             <button type="button" onClick={addComment}>Legg til kommentar</button>
