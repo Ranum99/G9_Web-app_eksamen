@@ -25,8 +25,6 @@ export default function Home() {
       newIssues = issues
     }
 
-    issues.map(issue => {console.log(issue.severity, importance);})
-
     setShowingIssues(newIssues)
   }, [importance, department, issues])
 
@@ -35,7 +33,7 @@ export default function Home() {
     try {
       const response = await axios.get('../api/issues');
 
-      console.log(response.data.data);
+      //console.log(response.data.data);
 
       setIssues(response.data.data)
     } catch(error) {

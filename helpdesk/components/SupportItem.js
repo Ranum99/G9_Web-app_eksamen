@@ -18,8 +18,6 @@ const SupportItem = ({ item, endItem }) => {
 
   const addComment = (evt) =>  {
     setShowAddComment(!showAddComment)
-    console.log("BIP BOOP COMMENTS IN MAKING");
-    console.log(item);
   }
 
   const seeComments = (evt) => {
@@ -55,7 +53,7 @@ const SupportItem = ({ item, endItem }) => {
       </li>
 
       {showAddComment &&
-        <SupportItemMakeComment />
+        <SupportItemMakeComment item={item}/>
       }
 
       {showComments && item?.comments?.map((comment, index)=> 
