@@ -40,8 +40,9 @@ article {
 	border-radius: 10px;
 	padding: 50px;
 	margin: 5px;
+}
 
-	// Tekst
+.center {
 	text-align: center;
 }
 
@@ -51,4 +52,37 @@ article {
 
 .active {
 	background-color: lightgreen;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.slot {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	justify-content: flex-start;
+}
+
+article > div {
+	display: flex;
+	flex-direction: row;
+	p {
+		margin-right: 25px;
+	}
+}
+
+.slotItem {
+	margin: 10px;
+	padding: 0;
+	border: 10px
+}
+
+tbody {
+	color: gray;
+}
+
+td {
+	width: 25%;
 }
