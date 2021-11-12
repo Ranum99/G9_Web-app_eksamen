@@ -30,6 +30,7 @@ model Slot {
   createdAt DateTime @default(now())
   openAt DateTime
   calender Calender @relation(fields: [calenderId], references: [id])
+  //calender Calender @relation(fields: [calenderId], references: [id])
   calenderId Int
 }
 
@@ -37,8 +38,9 @@ model UserSlot {
   id Int @id @default(autoincrement())
   coupon String
   createdAt DateTime @default(now())
-  // Må lage relasjonen
+  slot Slot @relation(fields: [slotId], references: [id])
   slotId Int
   // Må lage relasjonen
+  user User  @relation(fields: [slotId], references: [id])
   userId Int
 }
