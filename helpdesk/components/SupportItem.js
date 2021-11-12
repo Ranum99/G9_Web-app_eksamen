@@ -3,10 +3,6 @@ import Link from "next/link"
 import SupportItemComment from "./SupportItemComment"
 import SupportItemMakeComment from "./SupportItemMakeComment"
 
-/**
-  - Alle på grupen må sende inn ønske for prosjekter (uansett)
-  - Gruppekontrakt: skrive hva som skjer dersom det blir er konflikt i gruppen
- */
 
 /* eslint-disable no-ternary */
 const SupportItem = ({ item, endItem }) => {
@@ -34,10 +30,6 @@ const SupportItem = ({ item, endItem }) => {
     setShowComment(!showComments)
   }
 
-  useEffect(() => {
-    console.log(item?.created_at);
-  }, [])
-
   return (
     <>
       <li className="issue">
@@ -59,9 +51,9 @@ const SupportItem = ({ item, endItem }) => {
           <div className="issue_actions">
             <button type="button" onClick={seeComments}>Se kommentarer ({item?.comments?.length ?? 0})</button>
             <button type="button" onClick={addComment}>Legg til kommentar</button>
-            <button type="button" onClick={handleEndButton}>
+            {!item.isResolved && <button type="button" onClick={handleEndButton}>
               Avslutt
-            </button>
+            </button>}
           </div>
         </footer>
       </li>

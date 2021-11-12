@@ -55,19 +55,23 @@ export default function Home() {
     try {
       const response = await axios.patch(`../api/issues/${id}`)
 
-      console.log(response);
-
       if (response.data.success) {
-        //setIssues(response.data.issues)
+        const issueIndex = issues.findIndex(issue => issue.id === id);
+        let newIssues = issues;
+        newIssues[issueIndex] = {...newIssues[issueIndex], isResolved: true}
+
+        setIssues(newIssues)
+        getIssues()
       } else {
         // TODO: brukerne får en feilmelding
+        alert(response.data.error)
       }
     } catch (error) {
       console.log(error)
     }
 
     //setIssues(newIssues);
-    console.log(id)
+    //console.log(id)
   }
 
   const handleInputOnChange = ({ currentTarget: { name, value } }) => {
