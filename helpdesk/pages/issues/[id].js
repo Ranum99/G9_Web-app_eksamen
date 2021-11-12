@@ -27,11 +27,7 @@ export default function oneSupportElement() {
   const endItem = async (id) => {
     // TODO: fikse funksjonalitet backend
     try {
-      const response = await axios.delete('../api/hello', {
-        params: {
-          id: id
-        }
-      })
+      const response = await axios.patch(`../api/issues/${id}`)
 
       if (response.data.success) {
         // TODO: sette supportElement sin is_resolved = true

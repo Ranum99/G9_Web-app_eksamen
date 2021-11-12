@@ -30,3 +30,12 @@ export const listOne = async ( id ) => {
 
   return { success: true, data: issue.data } 
 }
+
+export const endIssue = async ( id ) => {
+  const issue = await issueRepo.endIssue(id)
+
+  if(!issue.success)
+    return { success: false, error: issue.error }
+
+  return { success: true, data: issue.data } 
+}

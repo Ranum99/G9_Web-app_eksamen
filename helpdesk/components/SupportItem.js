@@ -3,6 +3,11 @@ import Link from "next/link"
 import SupportItemComment from "./SupportItemComment"
 import SupportItemMakeComment from "./SupportItemMakeComment"
 
+/**
+  - Alle på grupen må sende inn ønske for prosjekter (uansett)
+  - Gruppekontrakt: skrive hva som skjer dersom det blir er konflikt i gruppen
+ */
+
 /* eslint-disable no-ternary */
 const SupportItem = ({ item, endItem }) => {
   const severityHigh = item?.severity === 3 ? 'Høy' : null

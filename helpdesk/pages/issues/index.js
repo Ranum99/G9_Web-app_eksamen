@@ -53,11 +53,9 @@ export default function Home() {
   const endItem = async (id) => {
     // TODO: denne finnes også i [id].js, kan kanskje sette den et sted hvor samme funksjon kan brukes 
     try {
-      const response = await axios.put('../api/hello', {
-        params: {
-          id: id
-        }
-      })
+      const response = await axios.patch(`../api/issues/${id}`)
+
+      console.log(response);
 
       if (response.data.success) {
         //setIssues(response.data.issues)

@@ -7,6 +7,9 @@ export default async function handler(req, res) {
     case 'get':
       await issuesController.listIssue(req, res);
       break;
+    case 'patch':
+      await issuesController.endIssue(req, res);
+      break;
     default: 
       res.status(405).end();
   }

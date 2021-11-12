@@ -45,3 +45,24 @@ export const findOne = async ( id ) => {
     return { success: false, error: 'En feil har oppstått' }
   }
 }
+
+export const endIssue = async (id) => {
+  try {
+    const issue = await prisma.issue.update({
+      where: {
+        id: id
+      },
+      data: {
+        isResolved: true,
+      },
+      include: {
+        comments: true,
+        department: true
+      }
+    })
+
+    return { success: true, data: issue }
+  } catch(error) {
+    return { success: false, error: 'En feil har oppstått' }
+  }
+}
