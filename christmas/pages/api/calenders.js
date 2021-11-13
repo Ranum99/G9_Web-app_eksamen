@@ -17,4 +17,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ success: true, data: calender })
   }
+
+  else
+    res.status(400).json({message: "Calander not found"})
 }
