@@ -8,7 +8,11 @@ export default async function handler(req, res) {
   if (req.method.toLowerCase() === 'get') {
    
     slotConntroller.getSlots
-  
     
+
+  }
+  
+  else {
+    res.status(405).end()
   }
 }
