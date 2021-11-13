@@ -14,6 +14,7 @@ model User {
   id Int @id @default(autoincrement())
   username String @unique
   createdAt DateTime @default(now())
+  //User slot is new
   userSlot UserSlot[]
 }
 
@@ -32,17 +33,25 @@ model Slot {
   openAt DateTime
   calender Calender @relation(fields: [calenderId], references: [id])
   calenderId Int
+  //user slot is new 
   userSlot UserSlot[]
-
 }
 
 model UserSlot {
   id Int @id @default(autoincrement())
+  
   coupon String
   createdAt DateTime @default(now())
+
+
+ 
+  //slot is new one to many,  (a slot can have many user slot, but a user slot can only have one slot)
   slot Slot @relation(fields: [slotId], references: [id])
   slotId Int
-  // Må lage relasjonen
+  
+
+ 
+  //one to many  a( a user slot can only have one user, a user can have multiple slots (one for each day))
   user User  @relation(fields: [slotId], references: [id])
   userId Int
 }

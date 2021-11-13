@@ -11,6 +11,7 @@ export default async function handler(req, res) {
         error: `${calenderId} er ikke et tall`,
       })
     }
+    
     const slots = await prisma.slot.findMany({
       where: {
         calender: {

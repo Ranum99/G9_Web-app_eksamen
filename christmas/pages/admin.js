@@ -13,14 +13,14 @@ const data = [
       {
         id: 25986,
         slug: 'abcd1234',
-        order: 0,
+        order: 1,
         createdAt: new Date(),
         openAt: new Date(),
       },
       {
         id: 23845,
         slug: 'dust3245',
-        order: 1,
+        order: 2,
         createdAt: new Date(),
         openAt: new Date(),
       },
