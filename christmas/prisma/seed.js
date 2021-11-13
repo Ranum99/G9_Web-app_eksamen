@@ -144,7 +144,19 @@ main()
   const createCalenderSlotwithUserAndSlot = async()=>{
 
 
+   // henter en user
+   const user = await prisma.user.findUnique({
+    where: {
+      username: 'test@test.no',
+    },
+  })
 
+    // henter en feed
+  const Slot = await prisma.slot.findUnique({
+    where: {
+      id: 'www.vg.no',
+    },
+  })
    await prisma.UserSlot.create({
     data: {
       slot : {

@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   switch (req.method.toLowerCase()) {
 
     case 'get': {
-           await UserController.getUsers(req, req)
+      await UserController.getUsers(req, req)
     }
     
     default:
