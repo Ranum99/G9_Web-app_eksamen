@@ -48,7 +48,7 @@ const SupportForm = () => {
     }
 
     // Checking if description length is less than 250 char
-    const descriptionRegex = new RegExp('^[a-z0-9_-]{0,250}$')
+    const descriptionRegex = new RegExp('^[a-zA-Z0-9_-]{0,250}$')
     if (!descriptionRegex.test(form.description)) {
       newErrors = {
         ...newErrors,
@@ -85,15 +85,21 @@ const SupportForm = () => {
           description: form.description,
           creator: form.creator,
           severity: parseInt(form.importance),
-          department_id: form.department
+          department_id: form.department,
         })
 
-        // TODO: brukeren får en melding om at den ble lagt til
-        // TODO: form blir nullstilt
+        alert('Hendelsen ble lagt til')
+        setForm({
+          title: '',
+          creator: '',
+          description: '',
+          importance: 1,
+          department: 'it',
+        })
 
-        console.log(response.data);
-      } catch(error) {
-        console.log(error);
+        console.log(response.data)
+      } catch (error) {
+        console.log(error)
       }
     }
   }
