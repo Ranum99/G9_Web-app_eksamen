@@ -5,12 +5,10 @@ import { rest } from "msw"
 
 export const getSlots = async(id) => {
  
-    if (!Number(id)) { return res.status(400).json({success: false,   error: `${calenderId} er ikke et tall`,  })    }
+    if (!Number(id)) { return res.status(400).json({success: false,   error: `${id} er ikke et tall`,  })    }
     
-
-
-
-    else if(slotService.checkIfExsist(id)){ return rest.status(400).json({success: false, error: `${calenderId} er does not exsist et tall`,})}
+    //if it doesnt  exsist 
+    else if(!slotService.checkIfExsist(id)){ return rest.status(400).json({success: true, error: `${id} er does not exsist et tall`,})}
    
    
     const slots = await prisma.slot.findMany({

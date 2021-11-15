@@ -4,18 +4,21 @@ import prisma  from "@/lib/clients/db";
 
 
 
-export const doeNotexsist = async (id) =>{
+export const doeNotexsist = async (name) =>{
   try {
     const calender = await prisma.calender.findUnique({
       where: {
-        id,
+        name: {
+          contains: name,
+        },
+      },
+      include: {
+        slot: true,
       },
     })
-      //if it exsist return true
-    return { success: true, data: calender }
 
-  } //if it doesn return error 
-  catch (error) {
+    return { success: true, data: calender }
+  } catch (error) {
     return { success: false, error: 'Failed finding calender' }
   }
 }

@@ -1,23 +1,15 @@
 import prisma from '@/lib/clients/db'
+import * as calenderController from "@/features/calenders/calenders.controller"
 
 export default async function handler(req, res) {
   const { name } = req.query
 
   if (req.method.toLowerCase() === 'get') {
-    const calender = await prisma.calender.findMany({
-      where: {
-        name: {
-          contains: name,
-        },
-      },
-      include: {
-        slot: true,
-      },
-    })
-
-    res.status(200).json({ success: true, data: calender })
+    calenderController.getCalenders(name)
   }
 
+
   else
+  //could also just use 404 i guess
     res.status(400).json({message: "Calander not found"})
 }
