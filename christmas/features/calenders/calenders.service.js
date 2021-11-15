@@ -1,13 +1,9 @@
-import * as calenderRepo from "@/features/calenders/calenders.repository"
-import { useCallback } from "react";
+import * as calenderRepo from '@/features/calenders/calenders.repository'
+import { useCallback } from 'react'
 
+export const checkIfExsist = async (name) => {
+  const calander = await calenderRepo.exsist(req, res, name)
 
-export const checkIfExsist  = async (name) =>{
-
-  const calander = await calenderRepo.exsist(name);
-
-  if(calander?.error) return {success: false, error: calander.error}
-  
-  else 
-  return false;
+  if (calander?.error) return { success: false, error: calander.error }
+  else return false
 }
