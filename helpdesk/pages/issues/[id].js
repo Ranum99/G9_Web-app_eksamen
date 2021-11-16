@@ -17,9 +17,13 @@ export default function oneSupportElement() {
     try {
       const response = await axios.get(`../api/issues/${id}`)
 
-      setSupportElement(response?.data?.data)
+      if(response?.data?.success && response?.data?.data)
+        setSupportElement(response?.data?.data)
+      else
+        console.log("meme"); 
+        // TODO: brukeren får opp en 404 - "Issue ikke funnet", eller bli sendt tilbake til der han kom fra
     } catch (error) {
-      // TODO: brukeren får opp en 404 - "Issue ikke funnet", eller bli sendt tilbake til der han kom fra
+      // TODO: brukeren får opp en feilmelding
       console.log(error)
     }
   }
@@ -55,7 +59,7 @@ export default function oneSupportElement() {
   return (
     <>
       <Head>
-        <title>{`${supportElement?.isResolved ? '(Løst)' : null} ${supportElement?.title}`}</title>
+        <title>{`${supportElement?.isResolved ? '(Løst)' : ''} ${supportElement?.title}`}</title>
       </Head>
       <Layout>
         <p>{JSON.stringify(supportElement)}</p>
