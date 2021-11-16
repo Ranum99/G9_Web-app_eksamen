@@ -1,6 +1,6 @@
 import axios from 'axios'
-
-const { useState } = require('react')
+import { useState } from 'react'
+import { validate } from '@/lib/validation'
 
 const SupportItemMakeComment = ({ item, getIssues }) => {
   const [comment, setComment] = useState('')
@@ -10,22 +10,29 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
   }
 
   const addComment = async () => {
-    try {
-      const response = await axios.post(`../api/comments/${item.id}`, {
-        comment: comment,
-      })
+    const commentCheck = validate.descriptionAndComment(comment);
+    console.log(commentCheck.error);
 
-      console.log(response)
-
-      if (response.data.success) {
-        getIssues();
-        setComment('')
-      } else {
+    if(commentCheck.success) {
+      try {
+        const response = await axios.post(`../api/comments/${item.id}`, {
+          comment: comment,
+        })
+  
+        console.log(response)
+  
+        if (response.data.success) {
+          getIssues();
+          setComment('')
+        } else {
+          // TODO: brukeren får en feilmelding
+        }
+      } catch (error) {
+        console.log(error)
         // TODO: brukeren får en feilmelding
       }
-    } catch (error) {
-      console.log(error)
-      // TODO: brukeren får en feilmelding
+    } else {
+      alert(commentCheck.error)
     }
   }
 
