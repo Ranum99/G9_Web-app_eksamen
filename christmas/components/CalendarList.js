@@ -1,7 +1,8 @@
 /* eslint-disable-line */
 
+import { useEffect, useState } from 'react'
 import CalendarCard from './CalendarCard'
-
+/*
 const cards = [
   {
     number: 1,
@@ -27,14 +28,33 @@ const cards = [
     type: 'notAvalibalie',
   },
 ]
+*/
 
 const CalendarList = () => {
+  const [slots, setSlots] = useState(['test', 'hei'])
+
+  const loadSlots = async () => {
+    console.log('load')
+    const response = await fetch('api/slots?calenderId=4', { method: 'GET' })
+
+    const data = await response.json()
+    console.log('DATA')
+    console.log(data)
+
+    setSlots(data.data)
+  }
+
+  useEffect(() => {
+    console.log('useEffect')
+    loadSlots()
+  }, [])
+
   return (
     <main>
-      {cards.map((card) => (
+      {slots.map((card) => (
         <CalendarCard
-          key={card.number}
-          number={card.number}
+          key={card.id}
+          number={card.order}
           type={card.type}
           code={card.code}
         />
