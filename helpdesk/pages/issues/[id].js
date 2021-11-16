@@ -59,7 +59,7 @@ export default function oneSupportElement() {
       </Head>
       <Layout>
         <p>{JSON.stringify(supportElement)}</p>
-        <SupportItem item={supportElement} endItem={endItem} />
+        <SupportItem item={supportElement} endItem={endItem} getIssues={getSuportElement} />
       </Layout>
     </>
   )
