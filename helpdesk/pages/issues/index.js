@@ -34,12 +34,14 @@ export default function Home() {
     }
 
     setShowingIssues(newIssues)
-    console.log(newIssues)
+    //console.log(newIssues)
   }, [filter, issues])
 
   const getIssues = async () => {
     try {
       const response = await axios.get('../api/issues')
+
+      console.log(response.data.data);
 
       //console.log(response.data.data);
       if (response.data.success) {
@@ -90,6 +92,7 @@ export default function Home() {
           handleInputOnChange={handleInputOnChange}
           issues={showingIssues}
           endItem={endItem}
+          getIssues={getIssues}
         />
       )}
     </Layout>

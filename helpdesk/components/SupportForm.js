@@ -104,7 +104,7 @@ const SupportForm = () => {
     }
   }
 
-  // Burde lage components ut av formen under
+  // TODO: Burde lage components ut av formen under
   return (
     <form className="support_form" onSubmit={handleSendSupport}>
       <h2>Ny henvendelse</h2>

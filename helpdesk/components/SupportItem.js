@@ -5,7 +5,7 @@ import SupportItemMakeComment from "./SupportItemMakeComment"
 
 
 /* eslint-disable no-ternary */
-const SupportItem = ({ item, endItem }) => {
+const SupportItem = ({ item, endItem, getIssues }) => {
   const severityHigh = item?.severity === 3 ? 'Høy' : null
   const severityMedium = item?.severity === 2 ? 'Medium' : null
   const severityLow = item?.severity === 1 ? 'Lav' : null
@@ -59,7 +59,7 @@ const SupportItem = ({ item, endItem }) => {
       </li>
 
       {showAddComment &&
-        <SupportItemMakeComment item={item}/>
+        <SupportItemMakeComment item={item} getIssues={getIssues} />
       }
 
       {showComments && item?.comments?.map((comment, index)=> 

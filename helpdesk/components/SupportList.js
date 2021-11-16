@@ -15,7 +15,7 @@ const departments = [
   { value: 'salg', name: 'Salg' },
 ]
 
-const SupportList = ({ handleInputOnChange, issues, endItem }) => {
+const SupportList = ({ handleInputOnChange, issues, endItem, getIssues }) => {
   return (
     <section className="issues">
       <h2>Henvendelser</h2>
@@ -32,7 +32,7 @@ const SupportList = ({ handleInputOnChange, issues, endItem }) => {
       <ul>
         {issues?.length !== 0 ? (
           issues?.map((issue) => (
-            <SupportItem key={issue.id} item={issue} endItem={endItem} />
+            <SupportItem key={issue.id} item={issue} endItem={endItem} getIssues={getIssues} />
           ))
         ) : (
           <p>Ingen resultater</p>

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const { useState } = require('react')
 
-const SupportItemMakeComment = ({ item }) => {
+const SupportItemMakeComment = ({ item, getIssues }) => {
   const [comment, setComment] = useState('')
 
   const handleChange = (evt) => {
@@ -17,9 +17,8 @@ const SupportItemMakeComment = ({ item }) => {
 
       console.log(response)
 
-      if (!response.data.success) {
-        // TODO: legge til i listen med kommentarer på objektet
-        // TODO: brukeren får en melding om at kommentaren ble lagt til, eller at den nye kommentaren blir highlighted
+      if (response.data.success) {
+        getIssues();
         setComment('')
       } else {
         // TODO: brukeren får en feilmelding
