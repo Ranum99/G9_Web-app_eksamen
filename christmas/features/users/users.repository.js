@@ -1,7 +1,17 @@
-import prisma from "@/lib/clients.db"
+import prisma from '@/lib/clients/db'
 
+export const getUsers = async () => {
+  try {
+    const users = await prisma.user.findMany()
 
-
-export const create = async (data) =>{
-  
+    return {
+      success: true,
+      data: users,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error,
+    }
+  }
 }

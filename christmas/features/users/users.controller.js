@@ -1,12 +1,15 @@
-import prisma from "@/lib/clients/db"
+import prisma from '@/lib/clients/db'
+import * as usersService from '@/features/users/users.service'
 
-export const getUsers = async (req, res) =>{
- users =  await prisma.user.findMany()
+export const getUsers = async (req, res) => {
+  const users = await usersService.getUsers()
 
- //returns not found
- if(user.error) return res.status(404).json;
+  console.log(users)
 
- elser 
- return res.status(200).json ({succsess: true, users})
-  
+  if (!users?.success) {
+    return users
+  } else {
+    console.log('returnerer')
+    return users
+  }
 }
