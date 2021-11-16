@@ -2,14 +2,14 @@ import Dropdown from './dropdown'
 import SupportItem from './SupportItem'
 
 const importance = [
-  { value: '', name: 'Select' },
+  { value: '', name: 'Alle' },
   { value: 1, name: 'Lav' },
   { value: 2, name: 'Medium' },
   { value: 3, name: 'Høy' },
 ]
 
 const departments = [
-  { value: '', name: 'Select' },
+  { value: '', name: 'Alle' },
   { value: 'it', name: 'IT' },
   { value: 'design', name: 'Design' },
   { value: 'salg', name: 'Salg' },
