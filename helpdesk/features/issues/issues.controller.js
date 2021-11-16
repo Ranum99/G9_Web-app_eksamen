@@ -1,37 +1,17 @@
 import * as issuesService from '@/features/issues/issues.service'
 
-const inputCheck = (title, description, creator) => {
-  // Checking if title's length is between 25 and 150 char
-  const titleRegex = new RegExp('^[a-zA-Z0-9\\s_-]{25,150}$')
-  if (!titleRegex.test(title)) {
-    return {success: false, error: 'Tittelen må bestå av mellom 25 og 150 bokstaver'}
-  }
-
-  // Checking if description length is less than 250 char
-  const descriptionRegex = new RegExp('^[a-z0-9_-]{0,250}$')
-  if (!descriptionRegex.test(description)) {
-    return {success: false, error: 'Beskrivelsen kan ikke være lengre enn 250 bokstaver'}
-  }
-
-  // Checking if name have at least one space and big char in first- and last name
-  const creatorRegex = new RegExp(
-    '^[A-Z]{1,1}[a-zA-Z]{1,}\\s[A-Z]{1,1}[a-zA-Z]{1,}$'
-  )
-  if (!creatorRegex.test(creator)) {
-    return {success: false, error: 'Navn skal bestå av ett fornavn og ett etternavn med store forbokstaver'}
-  }
-
-  return {success: true}
-}
+import { validate } from '@/lib/validation'
 
 export const createIssue = async (req, res) => {
   const { title, description, creator, severity, department_id } = req.body
 
-  const inputIsValid = inputCheck();
+  const titleCheck = validate.title(title)
+  const descriptionCheck = validate.descriptionAndComment(description)
+  const creatorCheck = validate.name(creator)
 
-  if(!inputIsValid) {
+  if(!titleCheck.success || !descriptionCheck.success || !creatorCheck.success) {
     // Returning {success: false, error: "[ERROR MESSAGE]"}
-    return res.status(400).json({success: false, error: inputIsValid.error})
+    return res.status(400).json({success: false, error: 'Fyll ut riktig'})
   }
 
   const createdIssue = await issuesService.create({

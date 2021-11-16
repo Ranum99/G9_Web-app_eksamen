@@ -3,6 +3,8 @@ import { useState } from 'react'
 
 import Dropdown from './dropdown'
 
+import { validate } from '@/lib/validation'
+
 const importance = [
   { value: 1, name: 'Lav' },
   { value: 2, name: 'Medium' },
@@ -32,47 +34,22 @@ const SupportForm = () => {
   const handleInputOnChange = ({ currentTarget: { name, value } }) =>
     setForm((state) => ({ ...state, [name]: value }))
 
-  // TODO: denne sjekken skjer også backend. Burde ligge et sted hvor samme sjekk kan brukes både frontend og backend
+  
   const inputCheck = () => {
-    let noErrors = true
-    let newErrors = { title: '', description: '', creator: '' }
+    const titleCheck = validate.title(form.title)
+    const descriptionCheck = validate.descriptionAndComment(form.description)
+    const creatorCheck = validate.name(form.creator)
 
-    // Checking if title's length is between 25 and 150 char
-    const titleRegex = new RegExp('^[a-zA-Z0-9\\s_-]{25,150}$')
-    if (!titleRegex.test(form.title)) {
-      newErrors = {
-        ...newErrors,
-        title: 'Tittelen må bestå av mellom 25 og 150 bokstaver',
-      }
-      noErrors = false
-    }
+    setError({
+      title: titleCheck.error,
+      description: descriptionCheck.error,
+      creator: creatorCheck.error,
+    })
+    
+    if(!titleCheck.success || !descriptionCheck.success || !creatorCheck.success)
+      return false
 
-    // Checking if description length is less than 250 char
-    const descriptionRegex = new RegExp('^[a-zA-Z0-9_-]{0,250}$')
-    if (!descriptionRegex.test(form.description)) {
-      newErrors = {
-        ...newErrors,
-        description: 'Beskrivelsen kan ikke være lengre enn 250 bokstaver',
-      }
-      noErrors = false
-    }
-
-    // Checking if name have at least one space and big char in first- and last name
-    const creatorRegex = new RegExp(
-      '^[A-Z]{1,1}[a-zA-Z]{1,}\\s[A-Z]{1,1}[a-zA-Z]{1,}$'
-    )
-    if (!creatorRegex.test(form.creator)) {
-      newErrors = {
-        ...newErrors,
-        creator:
-          'Navn skal bestå av ett fornavn og ett etternavn med store forbokstaver',
-      }
-      noErrors = false
-    }
-
-    setError(newErrors)
-
-    return noErrors
+    return true
   }
 
   const handleSendSupport = async (event) => {
