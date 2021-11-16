@@ -34,18 +34,13 @@ const CalendarList = () => {
   const [slots, setSlots] = useState(['test', 'hei'])
 
   const loadSlots = async () => {
-    console.log('load')
     const response = await fetch('api/slots?calenderId=4', { method: 'GET' })
 
     const data = await response.json()
-    console.log('DATA')
-    console.log(data)
-
     setSlots(data.data)
   }
 
   useEffect(() => {
-    console.log('useEffect')
     loadSlots()
   }, [])
 
@@ -53,10 +48,11 @@ const CalendarList = () => {
     <main>
       {slots.map((card) => (
         <CalendarCard
-          key={card.id}
+          key={card.order}
           number={card.order}
           type={card.type}
           code={card.code}
+          openAt={card.openAt}
         />
       ))}
     </main>
