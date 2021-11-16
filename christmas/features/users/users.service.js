@@ -1,8 +1,6 @@
 import * as userRepo from '@/features/users/users.repository'
 
 export const getUsers = async () => {
-  console.log('Er i service')
-
   const users = await userRepo.getUsers()
 
   if (users.success) {
@@ -14,8 +12,6 @@ export const getUsers = async () => {
     }
     return users
   } else {
-    console.log('Ingen brukere -.-')
-    console.log(users.error)
     return users
   }
 }

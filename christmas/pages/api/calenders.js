@@ -8,5 +8,7 @@ export default async function handler(req, res) {
     calenderController.getCalenders(req, res, name)
   }
   //could also just use 404 i guess
-  else res.status(400).json({ message: 'Calander not found' })
+  else {
+    res.status(400).json({ message: 'Calander not found' })
+  }
 }

@@ -14,11 +14,7 @@ export const exsist = async (id) => {
       },
     })
 
-    console.log(calender)
-    console.log(calender.length)
-
     if (calender.length == 0) {
-      console.log('Returnerer error')
       return {
         success: false,
         error: 'Fant ingen kalender med ID ' + id,
@@ -27,8 +23,6 @@ export const exsist = async (id) => {
 
     return { success: true, data: calender }
   } catch (error) {
-    //if it doesn return error
-    console.log(error)
-    return { success: false, error: 'Failed finding calender' }
+    return { success: false, error: 'Failed finding calender: ' + error }
   }
 }

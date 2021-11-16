@@ -4,12 +4,10 @@ import * as usersService from '@/features/users/users.service'
 export const getUsers = async (req, res) => {
   const users = await usersService.getUsers()
 
-  console.log(users)
-
+  // TODO: Kan bare returnere, vell
   if (!users?.success) {
     return users
   } else {
-    console.log('returnerer')
     return users
   }
 }

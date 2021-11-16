@@ -20,6 +20,6 @@ export const doeNotexsist = async (name) => {
 
     return { success: true, data: calender }
   } catch (error) {
-    return { success: false, error: 'Failed finding calender' }
+    return { success: false, error: 'Failed finding calender' + error }
   }
 }
