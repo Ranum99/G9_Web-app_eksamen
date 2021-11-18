@@ -2,24 +2,23 @@ import prisma from '@/lib/clients/db'
 import { PrismaErrors } from '@/lib/api/errors'
 import { Result } from '@/lib/api/result'
 
+
+
 const createCoupon = () => {
   // TODO: Lage coupon mer tilfeldig
 
 
   let coupon = ''
 
-  //added smaller letters too 
+ 
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-  /* My suggestion for more random 
+  
   
 
-  //genereates 4 random numbers  the last argument sets the number of numbers we get
-   let fourRndNumr = Math.random().toString().substr(2, 4); 
-
-
+ 
+   let fourRndNumr = Math.random().toString().substr(2, 8); 
 
    let nrOfRndLetter = 4;
-   //holdetr string
    let str = '';
 
    //generates 4 random letters 
@@ -27,20 +26,33 @@ const createCoupon = () => {
        str += letters.charAt(Math.floor(Math.random() * letters.length));
    }
 
-   coupon = fourRndNumr + str;
-   */
-
-
+   holder = fourRndNumr + str;
   
-  for (let i = 0; i < 4; i++) {
-    coupon += letters[Math.random() * letters.length]
-  }
-  for (let i = 0; i < 4; i++) {
-    coupon += Math.random() * 10
+   const holderArray = holder.split("");
+
+   coupon = shuffle(holderArray)
+  
+  return coupon
+}
+
+const shuffle=(array)=> {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle...
+  while (currentIndex != 0) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
   }
 
-  console.log(coupon)
-  return coupon
+  let randomCode = array.toString();
+
+  return randomCode;
 }
 
 export const create = async (slotId, userId) => {
