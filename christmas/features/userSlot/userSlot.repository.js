@@ -3,7 +3,10 @@ import { PrismaErrors } from '@/lib/api/errors'
 import { Result } from '@/lib/api/result'
 
 const createCoupon = () => {
-  // TODO: Lage coupon mer tilfeldig
+  return '1234abcd'
+  // TODO: Fikse å lage en coupon
+  /*
+	// TODO: Lage coupon mer tilfeldig
 
   let coupon = ''
 
@@ -26,6 +29,7 @@ const createCoupon = () => {
   coupon = shuffle(holderArray)
 
   return coupon
+	*/
 }
 
 const shuffle = (array) => {
@@ -58,12 +62,13 @@ export const create = async (slotId, userId) => {
     const userSlot = await prisma.userSlot.create({
       data: {
         user: {
-          connect: { id: userId },
+          connect: { id: Number(userId) },
         },
         slot: {
-          connect: { id: slotId },
+          connect: { id: Number(76) },
         },
         coupon: coupon,
+        createdAt: new Date(),
       },
     })
 
