@@ -1,6 +1,8 @@
 import * as userRepo from '@/features/users/users.repository'
 import { Result } from '@/lib/api/result'
 
+
+
 export const getUsers = async () => {
   const users = await userRepo.getUsers()
 

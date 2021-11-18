@@ -1,6 +1,6 @@
-import prisma from '@/lib/clients/db'
-import { Result } from '@/lib/api/result'
 import { PrismaErrors } from '@/lib/api/errors'
+import { Result } from '@/lib/api/result'
+import prisma from '@/lib/clients/db'
 
 export const getUsers = async () => {
   try {

@@ -1,5 +1,6 @@
+import { PrismaErrors } from '@/lib/api/errors'
+import { Result } from '@/lib/api/result'
 import prisma from '@/lib/clients/db'
-
 export const exsist = async (id) => {
   try {
     id = Number(id)

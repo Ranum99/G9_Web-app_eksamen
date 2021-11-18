@@ -1,6 +1,6 @@
-import prisma from '@/lib/clients/db'
-import * as usersService from '@/features/users/users.service'
+import * as usersService from './users.service'
 import { ApiResponse } from '@/lib/api/apiResponse'
+
 
 export const getUsers = async (req, res) => {
   const users = await usersService.getUsers()
