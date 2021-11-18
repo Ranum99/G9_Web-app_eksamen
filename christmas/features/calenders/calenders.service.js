@@ -1,6 +1,27 @@
 import * as calenderRepo from '@/features/calenders/calenders.repository'
-import { useCallback } from 'react'
+import { Result } from '@/lib/api/result'
 
+
+export const checkIfExsist = async (req, res, name = '') => {
+
+  if (name == '') {
+    return Result.failure(name.error)
+   
+  }
+
+  const calander = await calenderRepo.doeNotExsist(name)
+
+  // TODO: Returnere direkte ??
+  if (calander?.success) {
+    Result.failure(calander.error)
+  }
+
+  return Result.success(calander.data)
+}
+
+
+
+/*
 export const checkIfExsist = async (req, res, name = '') => {
   if (name == '') {
     return {
@@ -18,3 +39,5 @@ export const checkIfExsist = async (req, res, name = '') => {
     return calander
   }
 }
+
+*/

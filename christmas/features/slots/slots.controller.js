@@ -1,9 +1,30 @@
-// TODO: Trenger ikke alle imports
-import prisma from '@/lib/clients/db'
-import * as slotsRepository from '@/features/slots/slots.repository'
-import * as slotService from './slots.service'
-import { rest } from 'msw'
 
+import * as slotService from './slots.service'
+
+import { ApiResponse } from '@/lib/api/apiResponse'
+
+
+
+
+export const getSlots = async (req, res, id) => {
+
+  if (!Number(id)) {
+
+    return ApiResponse(res).badRequest(`${id} er ikke et tall` )
+  }
+
+
+  const slots = await slotService.checkIfExsist(id)
+
+  if (slots.success) {
+    return ApiResponse(res).ok(slots)
+  } else {
+   return ApiResponse(res).badRequest("Error getting data")
+  }
+}
+
+
+/*
 export const getSlots = async (req, res, id) => {
   if (!Number(id)) {
     return res
@@ -20,3 +41,4 @@ export const getSlots = async (req, res, id) => {
     res.status(400).json(slots)
   }
 }
+*/

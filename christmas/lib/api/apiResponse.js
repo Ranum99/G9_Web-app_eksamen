@@ -15,6 +15,10 @@ export const ApiResponse = (res) => ({
     // Logging error
     return res.status(409).json({ success: false, error })
   },
+  notFound: (error = 'Ressursen finnes ikke') => {
+    // Logging error
+    return res.status(404).json({ success: false, error })
+  },
   serverError: (error = 'Forespørselen feilet') => {
     // Logging error
     return res.status(500).json({ success: false, error })
