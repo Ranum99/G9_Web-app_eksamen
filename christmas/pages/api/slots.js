@@ -7,6 +7,7 @@ export default async function handler(req, res) {
 
   if (req.method.toLowerCase() === 'get') {
     await slotConntroller.getSlots(req, res, calenderId)
+    
   } else {
     res.status(405).end()
   }

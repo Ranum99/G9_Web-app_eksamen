@@ -1,7 +1,14 @@
 export const ApiResponse = (res) => ({
+
+  osk: (data) => {
+    // Logging error
+    return res.status(200).json({ success: true, data })
+ 
+  },
   ok: (data) => {
     // Logging error
     return res.status(200).json({ success: true, data })
+ 
   },
   created: (data) => {
     // Logging error

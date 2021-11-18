@@ -16,11 +16,11 @@ export const getSlots = async (req, res, id) => {
 
   const slots = await slotService.checkIfExsist(id)
 
-  if (slots.success) {
-    return ApiResponse(res).ok(slots)
-  } else {
-   return ApiResponse(res).badRequest("Error getting data")
-  }
+  if (!slots?.success) {
+    return ApiResponse(res).badRequest("Error getting data")
+  } 
+   return ApiResponse(res).ok(slots)
+  
 }
 
 
