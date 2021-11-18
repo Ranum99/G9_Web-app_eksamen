@@ -8,33 +8,29 @@ export const getUserSlot = async (req, res) => {
   console.log(userId)
 
   if (!slotId || !userId) {
-    return ApiResponse(res).badRequest("Mangler slotId og/eller userId")
+    return ApiResponse(res).badRequest('Mangler slotId og/eller userId')
   }
 
-  const userSlot = await userSlotService.getUserSlot({
-    slotId,
-    userId,
-  })
+  const userSlot = await userSlotService.getUserSlot(slotId, userId)
 
   if (!userSlot.success) {
     switch (userSlot?.type) {
       case 'User.NotExsist':
-        return ApiResponse(res).notFound("Error 404: User Not Found")
-        break;
+        return ApiResponse(res).notFound('Error 404: User Not Found')
+        break
 
       case 'Slot.NotExsist':
-       return ApiResponse(res).notFound("Error 404: User Not Found")
-       break;
+        return ApiResponse(res).notFound('Error 404: User Not Found')
+        break
 
       case 'UserSlot.Exist':
-        ApiResponse(res).conflict("Finnes allerede")
-        
+        ApiResponse(res).conflict('Finnes allerede')
+
       default:
         return ApiResponse(res).serverError
     }
   }
 }
-
 
 /*
 
