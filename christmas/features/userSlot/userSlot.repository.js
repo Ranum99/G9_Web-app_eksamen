@@ -93,7 +93,7 @@ export const exist = async (slotId, userId) => {
     
   } catch (error) {
     console.log(error)
-    return  Result.failure(userSlot)
+    return  Result.failure(PrismaErrors.read("userSlot",undefined,error))
    
   }
 }
