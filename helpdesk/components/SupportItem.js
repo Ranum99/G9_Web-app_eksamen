@@ -10,6 +10,7 @@ const SupportItem = ({ item, endItem, getIssues }) => {
   const severityMedium = item?.severity === 2 ? 'Medium' : null
   const severityLow = item?.severity === 1 ? 'Lav' : null
   
+  // Henter datoen issuen ble laget, og henter deretter ut dag (dd), måned (mm) og år (__åå)
   const date = new Date(item?.created_at)
   const date_format = date.getDate() < 10 ? `0${date.getDate()}`: date.getDate()
   const month_format = date.getMonth() + 1
@@ -27,6 +28,7 @@ const SupportItem = ({ item, endItem, getIssues }) => {
   }
 
   const seeComments = (evt) => {
+    // Dersom det ikke finnes noen kommentarer vil brukeren få en popup
     if(item.comments.length > 0)
       setShowComment(!showComments)
     else 

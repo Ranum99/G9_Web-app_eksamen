@@ -1,4 +1,5 @@
 const SupportItemComment = ({ comment, index }) => {
+  // Henter datoen kommentaren ble laget, og henter deretter ut dag (dd), måned (mm) og år (__åå)
   const date = new Date(comment?.created_at)
   const date_format = date.getDate() < 10 ? `0${date.getDate()}`: date.getDate()
   const month_format = date.getMonth() + 1

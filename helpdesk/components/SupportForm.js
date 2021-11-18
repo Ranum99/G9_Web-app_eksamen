@@ -36,10 +36,12 @@ const SupportForm = () => {
 
   
   const inputCheck = () => {
+    // Sjekker input
     const titleCheck = validate.title(form.title)
     const descriptionCheck = validate.descriptionAndComment(form.description, 'description')
     const creatorCheck = validate.name(form.creator)
 
+    // Setter error uansett. Dersom x.success = false, vil den gi ''
     setError({
       title: titleCheck.error,
       description: descriptionCheck.error,
@@ -57,6 +59,7 @@ const SupportForm = () => {
 
     if (inputCheck()) {
       try {
+        // Sender en post request til API
         const response = await axios.post('../api/issues/', {
           title: form.title,
           description: form.description,
@@ -66,6 +69,8 @@ const SupportForm = () => {
         })
 
         alert('Hendelsen ble lagt til')
+
+        // Setter form tilbake til default
         setForm({
           title: '',
           creator: '',
@@ -74,7 +79,7 @@ const SupportForm = () => {
           department: 'it',
         })
 
-        //console.log(response.data)
+        
       } catch (error) {
         alert(error)
         console.log(error)

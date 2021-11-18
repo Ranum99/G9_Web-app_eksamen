@@ -10,17 +10,18 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
   }
 
   const addComment = async () => {
+    // Sjekker input
     const commentCheck = validate.descriptionAndComment(comment, 'omment');
 
     if(commentCheck.success) {
       try { 
+        // Sender en post request til API
         const response = await axios.post(`../api/comments/${item.id}`, {
           comment: comment,
         })
   
-        console.log(response)
-  
         if (response.data.success) {
+          // Henter issuene på nytt, som vil oppdatere kommentarene med den man la til (og evt andre har lagt til)
           getIssues();
           setComment('')
         } else {
@@ -31,6 +32,7 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
         alert(error)
       }
     } else {
+      // Gir brukeren en feilmelding på popup
       alert(commentCheck.error)
     }
   }

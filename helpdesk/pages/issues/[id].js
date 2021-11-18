@@ -18,20 +18,22 @@ export default function oneSupportElement() {
 
   const getSuportElement = async () => {
     try {
+      // Prøver å hente en spesifik issue med id x
       const response = await axios.get(`../api/issues/${id}`)
 
       if(response?.data?.success && response?.data?.data)
         setSupportElement(response?.data?.data)
       else
+        // Dersom id-en ikke finnes i db, blir det satt en error = true, og brukeren ser en 404 - error skjerm
         setError(true)
     } catch (error) {
       alert(error)
-      console.log(error)
     }
   }
 
   const endItem = async (id) => {
     try {
+      // Sender en patch (UPDATE) request til API
       const response = await axios.patch(`../api/issues/${id}`)
 
       if (response.data.success) {
@@ -41,11 +43,7 @@ export default function oneSupportElement() {
       }
     } catch (error) {
       alert(error)
-      console.log(error)
     }
-
-    //setIssues(newIssues);
-    console.log(id)
   }
 
   useEffect(() => {

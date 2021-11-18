@@ -17,27 +17,30 @@ export default function Home() {
     // TODO: føler at denne kan bli gjort på en mye bedre måte
 
     let newIssues = issues
-    if (filter.importance && filter.department) {
+    
+    if (filter.importance && filter.department) { // Henter ut alle issues hvor viktigheten OG avdelingen er lik filterene
       newIssues = issues?.filter(
         (issue) =>
           issue.severity === parseInt(filter.importance) &&
           issue.department.id === filter.department
       )
-    } else if (filter.importance) {
+    } else if (filter.importance) { // Henter ut alle issues hvor viktigheten er lik filterene
       newIssues = issues?.filter(
         (issue) => issue.severity === parseInt(filter.importance)
       )
-    } else if (filter.department) {
+    } else if (filter.department) { // Henter ut alle issues hvor viktigheten er lik filterene
       newIssues = issues?.filter(
         (issue) => issue.department.id === filter.department
       )
     }
 
+    // Setter issuene som skal vises i array
     setShowingIssues(newIssues)
-  }, [filter, issues])
+  }, [filter, issues]) // Vil oppdateres dersom en av filterene endres
 
   const getIssues = async () => {
     try {
+      // Sender en get request til API
       const response = await axios.get('../api/issues')
 
       if (response.data.success) {
@@ -51,6 +54,8 @@ export default function Home() {
   }
 
   useEffect(() => {
+    // Når brukeren kommer inn på siden vil den prøve å hente alle issues. 
+    // Dersom det tar litt tid vil det stå "Loading" til issuene er hentet 
     getIssues()
     setLoading(false)
   }, [])
@@ -58,14 +63,10 @@ export default function Home() {
   const endItem = async (id) => {
     // TODO: denne finnes også i [id].js, kan kanskje sette den et sted hvor samme funksjon kan brukes
     try {
+      // Sender en patch (UPDATE) request til API
       const response = await axios.patch(`../api/issues/${id}`)
 
       if (response.data.success) {
-        const issueIndex = issues.findIndex((issue) => issue.id === id)
-        let newIssues = issues
-        newIssues[issueIndex] = { ...newIssues[issueIndex], isResolved: true }
-
-        setIssues(newIssues)
         getIssues()
       } else {
         alert(response.data.error)
