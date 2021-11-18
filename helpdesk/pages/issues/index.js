@@ -34,20 +34,16 @@ export default function Home() {
     }
 
     setShowingIssues(newIssues)
-    //console.log(newIssues)
   }, [filter, issues])
 
   const getIssues = async () => {
     try {
       const response = await axios.get('../api/issues')
 
-      console.log(response.data.data);
-
-      //console.log(response.data.data);
       if (response.data.success) {
         setIssues(response.data.data)
       } else {
-        //TODO: brukeren får en feilmelding
+        alert(response.data.error)
       }
     } catch (error) {
       console.log(error)
@@ -72,7 +68,6 @@ export default function Home() {
         setIssues(newIssues)
         getIssues()
       } else {
-        // TODO: brukerne får en feilmelding
         alert(response.data.error)
       }
     } catch (error) {

@@ -37,7 +37,7 @@ const SupportForm = () => {
   
   const inputCheck = () => {
     const titleCheck = validate.title(form.title)
-    const descriptionCheck = validate.descriptionAndComment(form.description)
+    const descriptionCheck = validate.descriptionAndComment(form.description, 'description')
     const creatorCheck = validate.name(form.creator)
 
     setError({
@@ -74,8 +74,9 @@ const SupportForm = () => {
           department: 'it',
         })
 
-        console.log(response.data)
+        //console.log(response.data)
       } catch (error) {
+        alert(error)
         console.log(error)
       }
     }

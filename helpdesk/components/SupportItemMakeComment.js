@@ -10,11 +10,10 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
   }
 
   const addComment = async () => {
-    const commentCheck = validate.descriptionAndComment(comment);
-    console.log(commentCheck.error);
+    const commentCheck = validate.descriptionAndComment(comment, 'omment');
 
     if(commentCheck.success) {
-      try {
+      try { 
         const response = await axios.post(`../api/comments/${item.id}`, {
           comment: comment,
         })
@@ -25,11 +24,11 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
           getIssues();
           setComment('')
         } else {
-          // TODO: brukeren får en feilmelding
+          alert(response.data.error)
         }
       } catch (error) {
         console.log(error)
-        // TODO: brukeren får en feilmelding
+        alert(error)
       }
     } else {
       alert(commentCheck.error)
@@ -44,7 +43,7 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Legg til kommentar
+        Legg til kommentar ({comment.length})
         <input
           onChange={handleChange}
           name="comment"

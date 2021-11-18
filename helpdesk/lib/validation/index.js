@@ -17,11 +17,11 @@ export const validate = {
 
     return {success: true, error: ''}
   },
-  descriptionAndComment(value) {
+  descriptionAndComment(value, type) {
     // Checking if description length is less than 250 char, but not 0
     const descriptionRegex = new RegExp('^[a-zA-Z0-9_-]{1,250}$')
     if (!descriptionRegex.test(value)) {
-      return {success: false, error: 'Beskrivelsen kan ikke være lengre enn 250 bokstaver, men heller ikke tom'}
+      return {success: false, error: `${type === 'description' ? 'Beskrivelsen' : 'Kommentaren'} kan ikke være lengre enn 250 bokstaver, men heller ikke tom`}
     }
 
     return {success: true, error: ''}

@@ -27,7 +27,10 @@ const SupportItem = ({ item, endItem, getIssues }) => {
   }
 
   const seeComments = (evt) => {
-    setShowComment(!showComments)
+    if(item.comments.length > 0)
+      setShowComment(!showComments)
+    else 
+      alert('Finnes ingen kommentarer på denne hendelsen')
   }
 
   return (
@@ -49,7 +52,7 @@ const SupportItem = ({ item, endItem, getIssues }) => {
         <footer>
           <span>{`${date_format}.${month_format}.${year_format}`}</span>
           <div className="issue_actions">
-            <button type="button" onClick={seeComments}>Se kommentarer ({item?.comments?.length ?? 0})</button>
+            <button type="button" onClick={seeComments}>{item?.comments?.length === 0 ? 'Ingen kommentarer' : `Se kommentarer (${item?.comments?.length ?? 0})`}</button>
             <button type="button" onClick={addComment}>Legg til kommentar</button>
             {!item.isResolved && <button type="button" onClick={handleEndButton}>
               Avslutt

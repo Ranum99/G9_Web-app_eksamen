@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
+import ErrorPage from 'next/error'
+
 import Head from 'next/head'
 
 import SupportItem from '@/components/SupportItem'
@@ -12,6 +14,7 @@ export default function oneSupportElement() {
   const id = router.query.id
 
   const [supportElement, setSupportElement] = useState({})
+  const [error, setError] = useState(false)
 
   const getSuportElement = async () => {
     try {
@@ -20,26 +23,24 @@ export default function oneSupportElement() {
       if(response?.data?.success && response?.data?.data)
         setSupportElement(response?.data?.data)
       else
-        console.log("meme"); 
-        // TODO: brukeren får opp en 404 - "Issue ikke funnet", eller bli sendt tilbake til der han kom fra
+        setError(true)
     } catch (error) {
-      // TODO: brukeren får opp en feilmelding
+      alert(error)
       console.log(error)
     }
   }
 
   const endItem = async (id) => {
-    // TODO: fikse funksjonalitet backend
     try {
       const response = await axios.patch(`../api/issues/${id}`)
 
       if (response.data.success) {
         setSupportElement({...supportElement, isResolved: true})
       } else {
-        // TODO: brukeren får en feilmelding
+        alert(response.data.error)
       }
     } catch (error) {
-      // TODO: brukeren får en feilmelding
+      alert(error)
       console.log(error)
     }
 
@@ -51,10 +52,12 @@ export default function oneSupportElement() {
     // Bare for at den ikke skal hente dersom det ikke er en id
     if(id) {
       getSuportElement()
-    } else {
-      // TODO: brukeren får opp en 404 - "Issue ikke funnet", eller bli sendt tilbake til der han kom fra
     }
   }, [id])
+
+  if(error) {
+    return <ErrorPage statusCode="404" />
+  }
 
   return (
     <>
@@ -62,7 +65,6 @@ export default function oneSupportElement() {
         <title>{`${supportElement?.isResolved ? '(Løst)' : ''} ${supportElement?.title}`}</title>
       </Head>
       <Layout>
-        <p>{JSON.stringify(supportElement)}</p>
         <SupportItem item={supportElement} endItem={endItem} getIssues={getSuportElement} />
       </Layout>
     </>
