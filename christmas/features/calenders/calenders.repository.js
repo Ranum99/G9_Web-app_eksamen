@@ -18,7 +18,6 @@ export const doeNotExsist = async (name) => {
 
     if (calender == null) {
       return  Result.failure(PrismaErrors.read(calender,undefined,error))
-
     }
     return Result.success(calender)
 

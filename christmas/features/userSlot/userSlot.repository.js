@@ -82,7 +82,7 @@ export const create = async (slotId, userId) => {
 
 
 
-export const exist = async (slotId, userId) => {
+export const exist = async ({slotId, userId}) => {
   // TODO: Virker ikke
   console.log('exist i userSlot repo')
   try {
