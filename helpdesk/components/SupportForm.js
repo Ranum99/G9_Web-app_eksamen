@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Dropdown from './dropdown'
 
 import { validate } from '@/lib/validation'
+import SupportFormComponent from './SupportFormComponent'
 
 const importance = [
   { value: 1, name: 'Lav' },
@@ -91,43 +92,33 @@ const SupportForm = () => {
   return (
     <form className="support_form" onSubmit={handleSendSupport}>
       <h2>Ny henvendelse</h2>
-      <div>
-        <label htmlFor="title">Tittel ({form.title.length})</label>
-        <p className="error">{error?.title}</p>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          onChange={handleInputOnChange}
-          value={form.title}
-        />
-      </div>
-      <div>
-        <label htmlFor="creator">Navn</label>
-        <p className="error">{error?.creator}</p>
-        <input
-          type="text"
-          id="creator"
-          name="creator"
-          required={true}
-          onChange={handleInputOnChange}
-          value={form.creator}
-        />
-      </div>
-      <div>
-        <label htmlFor="description">
-          Beskrivelse ({form.description.length})
-        </label>
-        <p className="error">{error?.description}</p>
-        <textarea
-          type="text"
-          id="description"
-          name="description"
-          required={true}
-          onChange={handleInputOnChange}
-          value={form.description}
-        />
-      </div>
+      <SupportFormComponent 
+        type="input"
+        id="title"
+        title="Tittel"
+        error={error?.title}
+        required="true"
+        handleInputOnChange={handleInputOnChange}
+        value={form.title}
+      />
+      <SupportFormComponent 
+        type="input"
+        id="creator"
+        title="Navn"
+        error={error?.creator}
+        required="true"
+        handleInputOnChange={handleInputOnChange}
+        value={form.creator}
+      />
+      <SupportFormComponent 
+        type="textarea"
+        id="description"
+        title="Beskrivelse"
+        error={error?.description}
+        required="true"
+        handleInputOnChange={handleInputOnChange}
+        value={form.description}
+      />
       <Dropdown
         name="importance"
         handleInputOnChange={handleInputOnChange}
