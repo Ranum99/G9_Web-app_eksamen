@@ -3,6 +3,9 @@ import { Result } from '@/lib/api/result'
 import * as userSlotRepository from '@/features/userSlot/userSlot.repository'
 import { UserSlotErrors } from './userSlot.error'
 
+import * as slotRepo from '@/features/slots/slots.repository'
+import * as usersRepo from '@/features/users/users.repository'
+/*
 export const getUserSlot = async (slotId, userId) => {
   // Sjekker om bruker allerede har fått kode
   const userSlot = await userSlotRepository.exist(slotId, userId)
@@ -22,17 +25,14 @@ export const getUserSlot = async (slotId, userId) => {
   }
   return Result.success(createdUserSlot.data)
 }
-
-/*
-
-
+*/
 export const getUserSlot = async (slotId, userId) => {
   // Sjekker om data allerede finnes
   // TODO: Legge til disse i repo filene
-  /*
-	// Kommentert ut da dette er metoder som ikke finnes :/
-	const slot = await slotRepo.exist(slotId)
-  const user = await usersRepo.exsts(userId)
+
+  // Kommentert ut da dette er metoder som ikke finnes :/
+  const slot = await slotRepo.exsistSingleSlot(slotId)
+  const user = await usersRepo.exist(userId)
 
   // Feilhåndtering, sjekker DB feil og så om data allerede finnes
   if (!slot.success) {
@@ -57,11 +57,10 @@ export const getUserSlot = async (slotId, userId) => {
   if (!user.data) {
     return {
       success: false,
-      type: 'User.NotExist',
+      type: 'User.NotExsist',
       error: `Bruker med ID ${userId} finnes ikke`,
     }
   }
-	///
 
   // Sjekker om bruker allerede har fått kode
   const userSlot = await userSlotRepository.exist(slotId, userId)
@@ -81,7 +80,7 @@ export const getUserSlot = async (slotId, userId) => {
     }
   }
 
-  const createdUserSlot = await userSlotRepository.createrUserSlot()
+  const createdUserSlot = await userSlotRepository.create(slotId, userId)
 
   if (!createdUserSlot.success) {
     return {
@@ -91,10 +90,7 @@ export const getUserSlot = async (slotId, userId) => {
   }
 
   return {
-  
     success: true,
     data: createdUserSlot.data,
   }
 }
-
-*/

@@ -65,7 +65,7 @@ export const create = async (slotId, userId) => {
           connect: { id: Number(userId) },
         },
         slot: {
-          connect: { id: Number(76) },
+          connect: { id: Number(slotId) },
         },
         coupon: coupon,
         createdAt: new Date(),
@@ -80,8 +80,6 @@ export const create = async (slotId, userId) => {
 }
 
 export const exist = async (slotId, userId) => {
-  // TODO: Virker ikke
-  console.log('exist i userSlot repo')
   try {
     // TODO: Bør være findUnique, men det går ikke for da må PK endres i DB
     // I DB er PK per nå en int som inkrementeres for hver oppføring
@@ -96,10 +94,6 @@ export const exist = async (slotId, userId) => {
       },
     })
 
-    console.log('UserSlot i repo:')
-    console.log(typeof userSlot)
-    console.log(userSlot)
-
     // TODO: Er det egentlig success når det er vellykka men ingen finnes?
     // Bør være det, for det skjer ikke noe feil?
     if (!userSlot) {
@@ -110,7 +104,7 @@ export const exist = async (slotId, userId) => {
     return Result.success(userSlot)
   } catch (error) {
     console.log(error)
-    return Result.failure(PrismaErrors.read('userSlot', undefined, error))
+    return Result.failure(error)
   }
 }
 

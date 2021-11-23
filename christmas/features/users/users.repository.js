@@ -7,12 +7,9 @@ export const getUsers = async () => {
     const users = await prisma.user.findMany()
 
     return Result.success(users)
-
   } catch (error) {
-
-  return Result.failure(PrismaErrors.read('users', undefined, error))
+    return Result.failure(PrismaErrors.read('users', undefined, error))
   }
-  
 }
 
 /* OLD
@@ -28,3 +25,34 @@ export const getUsers = async () => {
   }
 }
 */
+
+export const exist = async (id) => {
+  try {
+    // TODO: Burde vell vært findUnique ?
+    const user = await prisma.user.findFirst({
+      where: {
+        id: {
+          equals: Number(id),
+        },
+      },
+    })
+
+    if (user == null) {
+      return {
+        success: false,
+        type: 'User.NotFound',
+        error: 'Bruker ikke funnet',
+      }
+    }
+
+    return {
+      success: true,
+      data: user,
+    }
+  } catch (error) {
+    return {
+      success: false,
+      error: error,
+    }
+  }
+}

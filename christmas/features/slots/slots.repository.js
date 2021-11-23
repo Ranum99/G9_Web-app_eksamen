@@ -4,15 +4,10 @@ import prisma from '@/lib/clients/db'
 import error from 'next/error'
 
 export const exsist = async (id) => {
-
-
   try {
     id = Number(id)
     console.log(typeof id + id)
     const calender = await prisma.slot.findMany({
-
-
-      
       where: {
         calender: {
           is: {
@@ -22,32 +17,44 @@ export const exsist = async (id) => {
       },
     })
 
-
     if (calender.length == 0) {
-      return  Result.failure(PrismaErrors.read(calender, 'Fant ingen kalender med id: ' + id, error))
-      
+      return Result.failure(
+        PrismaErrors.read(calender, 'Fant ingen kalender med id: ' + id, error)
+      )
     }
 
-
-    return Result.success(calender);
-    
+    return Result.success(calender)
   } catch (error) {
-    
-    return Result.failure(PrismaErrors.read(calender,undefined, error))
-   
+    return Result.failure(PrismaErrors.read(calender, undefined, error))
   }
 }
 
+export const exsistSingleSlot = async (id) => {
+  try {
+    const slot = await prisma.slot.findFirst({
+      where: {
+        id: {
+          equals: Number(id),
+        },
+      },
+    })
 
-/*old
- if (calender.length == 0) {
+    if (slot == null) {
       return {
         success: false,
-        error: 'Fant ingen kalender med ID ' + id,
+        type: 'Slot.NotFound',
+        error: 'Slot ikke funnet',
       }
     }
 
-    return { success: true, data: calender }
+    return {
+      success: true,
+      data: slot,
+    }
   } catch (error) {
-    return { success: false, error: 'Failed finding calender: ' + error }
-  }*/
+    return {
+      success: false,
+      error: error,
+    }
+  }
+}

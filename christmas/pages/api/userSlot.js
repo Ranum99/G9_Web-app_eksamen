@@ -6,8 +6,6 @@ export default async function handler(req, res) {
   switch (req.method.toLowerCase()) {
     case 'get':
       userSlotController.getUserSlot(req, res)
-      res.json({ method: 'get' })
-      res.end()
       break
     default:
       res.status(405)

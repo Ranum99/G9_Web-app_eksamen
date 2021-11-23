@@ -4,14 +4,13 @@ import { ApiResponse } from '@/lib/api/apiResponse'
 export const getUserSlot = async (req, res) => {
   const { slotId, userId } = req.query
 
-  console.log(slotId)
-  console.log(userId)
-
   if (!slotId || !userId) {
     return ApiResponse(res).badRequest('Mangler slotId og/eller userId')
   }
 
   const userSlot = await userSlotService.getUserSlot(slotId, userId)
+
+  console.log(userSlot)
 
   if (!userSlot.success) {
     switch (userSlot?.type) {
@@ -30,6 +29,9 @@ export const getUserSlot = async (req, res) => {
         return ApiResponse(res).serverError
     }
   }
+  res.status(200)
+  res.json({ success: true, data: userSlot.data })
+  res.end()
 }
 
 /*
