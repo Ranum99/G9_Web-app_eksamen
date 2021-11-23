@@ -38,26 +38,28 @@ export const getUserSlot = async (slotId, userId) => {
   if (!slot.success) {
     return {
       success: false,
+      type: slot.type,
       error: slot.error,
     }
   }
   if (!slot.data) {
     return {
       success: false,
-      type: 'Slot.NotExist',
+      type: slot.type,
     }
   }
 
   if (!user.success) {
     return {
       success: false,
+      type: user.type,
       error: user.error,
     }
   }
   if (!user.data) {
     return {
       success: false,
-      type: 'User.NotExsist',
+      type: user.type,
       error: `Bruker med ID ${userId} finnes ikke`,
     }
   }

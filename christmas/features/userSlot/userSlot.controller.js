@@ -14,12 +14,12 @@ export const getUserSlot = async (req, res) => {
 
   if (!userSlot.success) {
     switch (userSlot?.type) {
-      case 'User.NotExsist':
+      case 'User.NotFound':
         return ApiResponse(res).notFound('Error 404: User Not Found')
         break
 
-      case 'Slot.NotExsist':
-        return ApiResponse(res).notFound('Error 404: User Not Found')
+      case 'Slot.NotFound':
+        return ApiResponse(res).notFound('Error 404: Slot Not Found')
         break
 
       case 'UserSlot.Exist':
