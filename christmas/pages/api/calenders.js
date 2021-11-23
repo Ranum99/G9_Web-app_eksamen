@@ -9,6 +9,10 @@ export default async function handler(req, res) {
   }
   //could also just use 404 i guess
   else {
-    res.status(400).json({ message: 'Calander not found' })
+    // TODO: Bruke api/result
+    res.status(405).json({
+      success: false,
+      error: 'Method not allowed',
+    })
   }
 }

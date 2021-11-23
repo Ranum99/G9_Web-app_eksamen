@@ -6,9 +6,7 @@ export const getCalenders = async (req, res, name) => {
   const calendar = await callenderService.checkIfExsist(req, res, name)
 
   if (!calendar?.success) {
-
-    return ApiResponse(res).badRequest(calendar)
- 
+    return ApiResponse(res).badRequest(calendar.error)
   } else {
     const calender = await prisma.calender.findMany({
       where: {
