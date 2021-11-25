@@ -20,7 +20,7 @@ export const useUser = () => {
         const response = await axios('/api/users')
 
         if (response?.data?.success) {
-          setUsers(response.data.users)
+          setUsers(response.data.data)
         }
       } catch (error) {
         console.log(error)
