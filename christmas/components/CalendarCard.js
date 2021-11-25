@@ -1,4 +1,8 @@
+import { userInfo } from '@/lib/utils/user'
+import { useState } from 'react'
+
 const CalendarCard = ({ number, code, openAt }) => {
+  const [coupon, setCoupon] = useState('')
   let type = ''
 
   const today = new Date()
@@ -8,14 +12,22 @@ const CalendarCard = ({ number, code, openAt }) => {
   // Samme som over, skal bare sammenligne dato
   slotDay.setHours(0, 0, 0, 0)
 
-  const getCoupon = () => {
-    // TODO: Hente/generere coupon fra DB
-    return '1234abcd'
+  const getCoupon = async () => {
+    const user = await userInfo()
+
+    const response = await fetch(
+      '/api/userSlot?slotId=73&userId=' + user.user.id
+    )
+    const data = await response.json()
+
+    console.log(data.data.coupon)
+
+    setCoupon(data.data.coupon)
   }
 
   if (today.getTime() === slotDay.getTime()) {
     type = 'active'
-    console.log('aktiv')
+    getCoupon()
   } else if (today < slotDay) {
     type = 'notAvalibalie'
   } else {
@@ -26,7 +38,7 @@ const CalendarCard = ({ number, code, openAt }) => {
       <h2>{number}</h2>
       {type == 'notAvalibalie' &&
         'Åpner om ' + (slotDay - today) / 1000 / 60 / 60 / 24 + ' dager'}
-      {type == 'active' && getCoupon()}
+      {type == 'active' && coupon}
     </article>
   )
 }
