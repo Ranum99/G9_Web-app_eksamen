@@ -5,7 +5,7 @@ export const ApiResponse = (res) => ({
   },
   ok: (data) => {
     // Logging error
-    return res.status(200).json({ success: true, data: data.data })
+    return res.status(200).json({ success: true, data: data })
   },
   created: (data) => {
     // Logging error

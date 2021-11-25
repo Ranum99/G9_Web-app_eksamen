@@ -12,5 +12,5 @@ export const getSlots = async (req, res, id) => {
   if (!slots?.success) {
     return ApiResponse(res).badRequest('Error getting data')
   }
-  return ApiResponse(res).ok(slots.data)
+  return ApiResponse(res).ok(slots)
 }
