@@ -1,14 +1,11 @@
 export const ApiResponse = (res) => ({
-
   osk: (data) => {
     // Logging error
     return res.status(200).json({ success: true, data })
- 
   },
   ok: (data) => {
     // Logging error
-    return res.status(200).json({ success: true, data })
- 
+    return res.status(200).json({ success: true, data: data.data })
   },
   created: (data) => {
     // Logging error
@@ -29,4 +26,5 @@ export const ApiResponse = (res) => ({
   serverError: (error = 'Forespørselen feilet') => {
     // Logging error
     return res.status(500).json({ success: false, error })
-  },})
+  },
+})
