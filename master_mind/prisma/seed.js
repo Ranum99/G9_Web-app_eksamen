@@ -5,9 +5,9 @@ const prisma = new PrismaClient()
 // Dummydata
 const games = [
   {combination: "red blue green yellow", user: "anders", numberOfTries: 2, foundCombination: true},
-  {combination: "blue green red yellow", user: "jonathan", numberOfTries: 4, foundCombination: false},
+  {combination: "blue green red yellow", user: "jonathan", numberOfTries: 9, foundCombination: false},
   {combination: "red yellow green blue", user: "martina", numberOfTries: 7, foundCombination: true},
-  {combination: "red blue yellow green", user: "aleksander", numberOfTries: 1, foundCombination: false}
+  {combination: "red blue yellow green", user: "aleksander", numberOfTries: 9, foundCombination: false}
 ]
 
 const createGames = async () => {

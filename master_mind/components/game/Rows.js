@@ -18,10 +18,8 @@ const Rows = () => {
     [state.currentRow]
   )
 
-  // TODO: Skrives om til å kalle på api for å få hints som kan brukes til å oppdatere UI
   const handleRowSubmit = async (event) => {
     event.preventDefault()
-    //const hints = getHints()
 
     try {
       const hintsData = await axios.get('../api/hint', {
@@ -32,18 +30,29 @@ const Rows = () => {
       const hints = hintsData.data.data;
       dispatch({ type: 'set_hints', payload: { hints } })
       if (hints?.positions === 4) {
-        // TODO: Må lagre antall forsøk brukeren brukte på å løse oppgaven
-        console.log(state);
+        finishGame(true)
+
         dispatch({ type: 'set_complete' })
-        console.log(state);
       } else {
-        // TODO: Må lagre at brukeren ikke klarte oppgaven når det ikke er flere forsøk igjen
+        if(state.currentRow === 9) {
+          finishGame(false)
+        }
         dispatch({ type: 'increase_row' })
       }
     } catch(error) {
       alert(error)
       console.log(error);
     }
+  }
+
+  const finishGame = async (finished) => {
+    const game = await axios.post('../api/game', {
+      combination: state.selectedColors,
+      numberOfTries: state.currentRow,
+      foundCombination: finished
+    })
+    if(!game.data.success)
+      alert(game.data.error)
   }
 
   const handleCellClick = (event) => {
