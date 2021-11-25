@@ -56,19 +56,21 @@ const shuffle = (array) => {
 
 export const create = async (slotId, userId) => {
   // Usikker på om dette virker
+  console.log(slotId)
+  console.log(userId)
   try {
     const coupon = createCoupon()
 
     const userSlot = await prisma.userSlot.create({
       data: {
-        user: {
-          connect: { id: Number(userId) },
-        },
+        coupon: coupon,
+        createdAt: new Date(),
         slot: {
           connect: { id: Number(slotId) },
         },
-        coupon: coupon,
-        createdAt: new Date(),
+        user: {
+          connect: { id: Number(userId) },
+        },
       },
     })
 
