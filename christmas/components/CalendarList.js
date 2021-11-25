@@ -2,42 +2,25 @@
 
 import { useEffect, useState } from 'react'
 import CalendarCard from './CalendarCard'
-/*
-const cards = [
-  {
-    number: 1,
-    code: 'luke0001',
-  },
-  {
-    number: 2,
-    code: 'test1234',
-  },
-  {
-    number: 3,
-    code: 'heii4444',
-    type: 'active',
-  },
-  {
-    number: 4,
-    code: 'dust4321',
-    type: 'notAvalibalie',
-  },
-  {
-    number: 5,
-    code: 'hade6666',
-    type: 'notAvalibalie',
-  },
-]
-*/
 
 const CalendarList = () => {
-  const [slots, setSlots] = useState(['test', 'hei'])
+  const [slots, setSlots] = useState([
+    {
+      id: -1,
+      slug: 'hardkoda data',
+      order: -1,
+      createdAt: '2022-11-03T10:29:30.834Z',
+      openAt: '2022-11-04T11:00:00.000Z',
+    },
+  ])
 
   const loadSlots = async () => {
     const response = await fetch('api/slots?calenderId=4', { method: 'GET' })
 
     const data = await response.json()
-    setSlots(data.data)
+
+    // TODO: Noe som er feil her, skulle vært data.data bare ?
+    setSlots(data.data.data)
   }
 
   useEffect(() => {
