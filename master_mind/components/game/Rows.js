@@ -6,6 +6,7 @@ import ColorPicker from './ColorPicker'
 import Row from './Row'
 import Solution from './Solution'
 import { useGameContext } from '@/contexts/game-context'
+import axios from 'axios'
 
 const Rows = () => {
   const { state, dispatch } = useGameContext()
@@ -17,37 +18,31 @@ const Rows = () => {
     [state.currentRow]
   )
 
-  // TODO: Denne må skrives om og bo i en service
-
-  const getHints = () => {
-    return state.selectedColors?.reduce(
-      (hints, color, index) => {
-        if (color === state.game.combination[index]) {
-          hints.positions += 1
-        } else if (state.game.combination.includes(color)) {
-          hints.colors += 1
-        }
-
-        return hints
-      },
-      { positions: 0, colors: 0 }
-    )
-  }
-
   // TODO: Skrives om til å kalle på api for å få hints som kan brukes til å oppdatere UI
-
   const handleRowSubmit = async (event) => {
     event.preventDefault()
-    const hints = getHints()
+    //const hints = getHints()
 
-    dispatch({ type: 'set_hints', payload: { hints } })
-    if (hints?.positions === 4) {
-      // TODO: Må lagre antall forsøk brukeren brukte på å løse oppgaven
-
-      dispatch({ type: 'set_complete' })
-    } else {
-      // TODO: Må lagre at brukeren ikke klarte oppgaven når det ikke er flere forsøk igjen
-      dispatch({ type: 'increase_row' })
+    try {
+      const hintsData = await axios.get('../api/hint', {
+        params: {
+          state: state
+        }
+      })
+      const hints = hintsData.data.data;
+      dispatch({ type: 'set_hints', payload: { hints } })
+      if (hints?.positions === 4) {
+        // TODO: Må lagre antall forsøk brukeren brukte på å løse oppgaven
+        console.log(state);
+        dispatch({ type: 'set_complete' })
+        console.log(state);
+      } else {
+        // TODO: Må lagre at brukeren ikke klarte oppgaven når det ikke er flere forsøk igjen
+        dispatch({ type: 'increase_row' })
+      }
+    } catch(error) {
+      alert(error)
+      console.log(error);
     }
   }
 

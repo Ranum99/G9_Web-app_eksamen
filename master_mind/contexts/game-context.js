@@ -49,8 +49,6 @@ const getRemainingColors = (selectedColors, currentColor) => {
 function gameReducer(state, action) {
   const { payload } = action
 
-  console.log(action);
-
   switch (action.type) {
     case 'picked_color': {
       return {
@@ -146,6 +144,7 @@ const GameProvider = ({ children }) => {
         })
         
       } catch(error) {
+        console.log(error);
         console.log(error);
       }
     }
