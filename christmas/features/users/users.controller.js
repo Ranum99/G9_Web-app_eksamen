@@ -7,5 +7,5 @@ export const getUsers = async (req, res) => {
   if (!users?.success) {
     return ApiResponse(res).serverError(users.error)
   }
-  return ApiResponse(res).ok(users)
+  return ApiResponse(res).ok(users.data)
 }
