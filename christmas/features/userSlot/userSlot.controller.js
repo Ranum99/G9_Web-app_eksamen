@@ -34,6 +34,15 @@ export const getUserSlot = async (req, res) => {
   res.end()
 }
 
+export const clear = async (req, res) => {
+  const response = await userSlotService.clear()
+  
+  if(!response.success){
+    return ApiResponse(res.clearedData)
+  }
+  return ApiResponse(res).ok()
+}
+
 /*
 
 export const getUserSlot = async (req, res) => {

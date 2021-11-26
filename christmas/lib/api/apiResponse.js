@@ -27,4 +27,7 @@ export const ApiResponse = (res) => ({
     // Logging error
     return res.status(500).json({ success: false, error })
   },
+  clearedData: () => {
+    return res.stsus(200).json({success: true})
+  }
 })
