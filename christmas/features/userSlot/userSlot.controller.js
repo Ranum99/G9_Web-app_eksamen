@@ -29,7 +29,7 @@ export const getUserSlot = async (req, res) => {
         return ApiResponse(res).serverError
     }
   }
-  res.status(200)
+  res.status(201)  //created
   res.json({ success: true, data: userSlot.data })
   res.end()
 }
