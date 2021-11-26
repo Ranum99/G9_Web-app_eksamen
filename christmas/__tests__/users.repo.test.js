@@ -13,6 +13,6 @@ describe ("get all usersr test"), () => {
   const result = await userControl.getUsers(request, response);
 
 
-  expect result.statusCode).toBe(200)
+  expect(result.statusCode).toBe(200)
 }
 
