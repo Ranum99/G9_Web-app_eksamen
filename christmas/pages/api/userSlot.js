@@ -7,6 +7,10 @@ export default async function handler(req, res) {
     case 'get':
       userSlotController.getUserSlot(req, res)
       break
+    case "delete":
+      // TODO: Slette meg når ferdig
+      userSlotController.clear(req, res)
+      break
     default:
       res.status(405)
       res.json({

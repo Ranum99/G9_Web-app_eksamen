@@ -16,14 +16,16 @@ const createCoupon = () => {
     coupon += letters.charAt(Math.floor(Math.random() * letters.length))
   }
 
-//  const holderArray = coupon.split('')
-//  coupon = shuffle(holderArray)
+  const holderArray = coupon.split('')
+  coupon = shuffle(holderArray)
 
   console.log(coupon)
 
   return coupon
 }
 
+// https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+// Linken til koden funnet 26.11.21
 const shuffle = (array) => {
   let currentIndex = array.length,
     randomIndex
@@ -35,13 +37,13 @@ const shuffle = (array) => {
     currentIndex--
 
     // And swap it with the current element.
-    ;[array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ]
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]]
   }
 
-  let randomCode = array.toString()
+  let randomCode = ""
+
+  array.forEach(element => randomCode += element)
 
   return randomCode
 }
@@ -94,5 +96,15 @@ export const exist = async (slotId, userId) => {
   } catch (error) {
     console.log(error)
     return Result.failure(error)
+  }
+}
+
+export const clear = async () => {
+  try {
+    await prisma.userSlot.deleteMany({})
+    console.log("Fjernet alle userSlot")
+    return Result.success(null)
+  } catch (error) {
+    return Result.error(error)
   }
 }

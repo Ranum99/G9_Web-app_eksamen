@@ -96,3 +96,13 @@ export const getUserSlot = async (slotId, userId) => {
     data: createdUserSlot.data,
   }
 }
+
+export const clear = async () => {
+  const response = await userSlotRepository.clear()
+
+  if (!response.success) {
+    return response
+  } else {
+    return Result.success("Fjernet alle slots")
+  }
+}
