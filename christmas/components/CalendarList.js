@@ -47,9 +47,8 @@ const CalendarList = () => {
         <CalendarCard
           key={card.order}
           number={card.order}
-          type={card.type}
-          code={card.code}
           openAt={card.openAt}
+          id={card.id}
         />
       ))}
     </main>
