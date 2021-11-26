@@ -1,7 +1,7 @@
 import { userInfo } from '@/lib/utils/user'
 import { useState } from 'react'
 
-const CalendarCard = ({ number, code, openAt }) => {
+const CalendarCard = ({ number, openAt, id }) => {
   const [coupon, setCoupon] = useState('')
   let type = ''
 
@@ -16,11 +16,9 @@ const CalendarCard = ({ number, code, openAt }) => {
     const user = await userInfo()
 
     const response = await fetch(
-      '/api/userSlot?slotId=73&userId=' + user.user.id
+      '/api/userSlot?slotId=' + id + '&userId=' + user.user.id
     )
     const data = await response.json()
-
-    console.log(data.data.coupon)
 
     setCoupon(data.data.coupon)
   }

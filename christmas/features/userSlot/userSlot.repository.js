@@ -3,33 +3,25 @@ import { PrismaErrors } from '@/lib/api/errors'
 import { Result } from '@/lib/api/result'
 
 const createCoupon = () => {
-  return '1234abcd'
   // TODO: Fikse å lage en coupon
-  /*
 	// TODO: Lage coupon mer tilfeldig
 
   let coupon = ''
 
+  coupon = Math.random().toString().substr(2, 4)
+
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-
-  let fourRndNumr = Math.random().toString().substr(2, 8)
-
-  let nrOfRndLetter = 4
-  let str = ''
-
   //generates 4 random letters
-  for (let i = 0; i < nrOfRndLetter; i++) {
-    str += letters.charAt(Math.floor(Math.random() * letters.length))
+  for (let i = 0; i < 4; i++) {
+    coupon += letters.charAt(Math.floor(Math.random() * letters.length))
   }
 
-  holder = fourRndNumr + str
+//  const holderArray = coupon.split('')
+//  coupon = shuffle(holderArray)
 
-  const holderArray = holder.split('')
-
-  coupon = shuffle(holderArray)
+  console.log(coupon)
 
   return coupon
-	*/
 }
 
 const shuffle = (array) => {
@@ -56,21 +48,17 @@ const shuffle = (array) => {
 
 export const create = async (slotId, userId) => {
   // Usikker på om dette virker
-  console.log(slotId)
-  console.log(userId)
   try {
     const coupon = createCoupon()
+
+    const date = new Date()
 
     const userSlot = await prisma.userSlot.create({
       data: {
         coupon: coupon,
         createdAt: new Date(),
-        slot: {
-          connect: { id: Number(slotId) },
-        },
-        user: {
-          connect: { id: Number(userId) },
-        },
+        slotId:  Number(slotId),
+        userId: Number(userId)
       },
     })
 
@@ -102,83 +90,9 @@ export const exist = async (slotId, userId) => {
       return Result.success(null)
     }
 
-    //added return for sucsess
     return Result.success(userSlot)
   } catch (error) {
     console.log(error)
     return Result.failure(error)
   }
 }
-
-/* OLD 
-const createCoupon = () => {
-  // TODO: Lage coupon mer tilfeldig
-  let coupon = ''
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  for (let i = 0; i < 4; i++) {
-    coupon += letters[Math.random() * letters.length]
-  }
-  for (let i = 0; i < 4; i++) {
-    coupon += Math.random() * 10
-  }
-
-  console.log(coupon)
-  return coupon
-}
-
-export const create = async (slotId, userId) => {
-  // Usikker på om dette virker
-  try {
-    const coupon = createCoupon()
-    const userSlot = await prisma.userSlot.create({
-      data: {
-        user: {
-          connect: { id: userId },
-        },
-        slot: {
-          connect: { id: slotId },
-        },
-        coupon: coupon,
-      },
-    })
-
-    return {
-      success: true,
-      data: userSlot,
-    }
-  } catch (error) {
-    console.log(error)
-    return {
-      success: false,
-      error: error,
-    }
-  }
-}
-
-export const exist = async (slotId, userId) => {
-  // TODO: Virker ikke
-  console.log('exist i userSlot repo')
-  try {
-    const userSlot = await prisma.userSlot.findUnique({
-      where: {
-        slotId_userId: {
-          slotId,
-          userId,
-        },
-      },
-    })
-
-    console.log('UserSlot i repo:')
-    console.log(typeof userSlot)
-    console.log(userSlot)
-    
-  } catch (error) {
-    console.log(error)
-    return {
-      success: false,
-      error: error,
-    }
-  }
-}
-
-*/
