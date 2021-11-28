@@ -16,5 +16,5 @@ export const saveGame = async (req, res) => {
     return res.status(500).json({success: false, data: game.error})
 
 
-  return res.status(200).json({success: true, data: game.data})
+  return res.status(201).json({success: true, data: game.data})
 }
