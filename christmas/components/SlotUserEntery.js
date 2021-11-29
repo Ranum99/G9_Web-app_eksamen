@@ -1,7 +1,4 @@
 const SlotUserEntery = ({ user }) => {
-  console.log('USER')
-  console.log(user)
-
   const date = user.created_at
 
   return (

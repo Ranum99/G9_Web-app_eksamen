@@ -31,17 +31,11 @@ const users = [
 
 const Slot = ({ slot }) => {
   const [max, setMax] = useState(3)
-  /*
-  console.log('SLOT')
-  console.log(slot)
-*/
+
   return (
     <article className="slot">
       <h2 className="underline slotItem">Luke {slot.order}</h2>
-      <p className="slotItem">
-        Tilgjengelig fra: {slot.openAt.getDate()}.{slot.openAt.getMonth() + 1}.
-        {slot.openAt.getFullYear()}
-      </p>
+      <p className="slotItem"></p>
       <div className="slotItem">
         <p className="underline"> Se alle deltakere ({users.length})</p>
         <p className="underline">Trekk superbonus</p>

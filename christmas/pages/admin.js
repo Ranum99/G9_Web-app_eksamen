@@ -1,7 +1,6 @@
 import Slot from '@/components/Slot'
 import SlotList from '@/components/SlotList'
-
-console.log('Oppdaterer\n\n\n')
+import { useEffect, useState } from 'react'
 
 const data = [
   {
@@ -30,13 +29,33 @@ const data = [
 
 const julekalender = data[0]
 
-console.log(julekalender)
-
 const admin = () => {
+  const [calendar, setCalendar] = useState({
+    id: 0,
+    name: 'Ikke lasta fra DB',
+    createdAt: '2021-11-03T10:29:30.837Z',
+    slot: [],
+  })
+
+  const load = async () => {
+    const response = await fetch('api/calenders?name=Julekalender')
+
+    const data = await response.json()
+
+    // TODO: Endre til
+    data.success
+      ? setCalendar(data.data)
+      : console.log('Feil ved inllasting av data fra DB')
+  }
+
+  useEffect(() => {
+    load()
+  }, [])
+
   return (
     <>
       <h1>Admin</h1>
-      <SlotList slots={julekalender.slot} />
+      <SlotList slots={calendar.slot} />
     </>
   )
 }
