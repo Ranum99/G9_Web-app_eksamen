@@ -30,4 +30,7 @@ export const ApiResponse = (res) => ({
   clearedData: () => {
     return res.stsus(200).json({ success: true })
   },
+  notAllowed: () => {
+    return res.status(200).json({ success: false, error: 'Method not allowed' })
+  },
 })
