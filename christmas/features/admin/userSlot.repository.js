@@ -2,8 +2,6 @@ import prisma from '@/lib/clients/db'
 import { Result } from '@/lib/api/result'
 
 export const getUserSlots = async (id) => {
-  console.log('REPO')
-
   try {
     const userSlots = await prisma.userSlot.findMany({
       where: {
