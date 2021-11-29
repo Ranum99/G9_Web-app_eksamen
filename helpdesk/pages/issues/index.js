@@ -2,6 +2,7 @@ import SupportList from '@/components/SupportList'
 import Layout from '@/components/layout'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import Head from 'next/head'
 
 export default function Home() {
   const [filter, setFilter] = useState({
@@ -80,17 +81,22 @@ export default function Home() {
     setFilter((state) => ({ ...state, [name]: value }))
 
   return (
-    <Layout>
-      {loading ? (
-        <p>loading</p>
-      ) : (
-        <SupportList
-          handleInputOnChange={handleInputOnChange}
-          issues={showingIssues}
-          endItem={endItem}
-          getIssues={getIssues}
-        />
-      )}
-    </Layout>
+    <>
+      <Head>
+        <title>Alle henvendelser</title>
+      </Head>
+      <Layout>
+        {loading ? (
+          <p>loading</p>
+        ) : (
+          <SupportList
+            handleInputOnChange={handleInputOnChange}
+            issues={showingIssues}
+            endItem={endItem}
+            getIssues={getIssues}
+          />
+        )}
+      </Layout>
+    </>
   )
 }
