@@ -8,7 +8,7 @@ export const getCalenders = async (req, res, name) => {
   if (!calendar?.success) {
     return ApiResponse(res).badRequest(calendar.error)
   } else {
-    const calender = await prisma.calender.findMany({
+    const calender = await prisma.calender.findFirst({
       where: {
         name,
       },

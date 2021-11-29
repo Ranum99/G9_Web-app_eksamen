@@ -28,6 +28,6 @@ export const ApiResponse = (res) => ({
     return res.status(500).json({ success: false, error })
   },
   clearedData: () => {
-    return res.stsus(200).json({success: true})
-  }
+    return res.stsus(200).json({ success: true })
+  },
 })
