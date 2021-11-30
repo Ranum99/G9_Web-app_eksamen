@@ -1,34 +1,6 @@
 import { createElement, useEffect, useState } from 'react'
 import SlotUsers from './SlotUsers'
 
-// TODO: Hente denna lista fra DB
-const users = [
-  {
-    id: 0,
-    coupon: 'ab12cd34',
-    created_at: new Date(),
-    username: 'Dust',
-  },
-  {
-    id: 1,
-    coupon: 'qwer1234',
-    created_at: new Date(2021, 11, 10),
-    username: 'glømte navn',
-  },
-  {
-    id: 2,
-    coupon: 'øæåå0000',
-    created_at: new Date(2021, 12, 12),
-    username: 'funka ikke lenge',
-  },
-  {
-    id: 3,
-    coupon: 'dust6969',
-    created_at: new Date(2021, 11, 5),
-    username: '-.-',
-  },
-]
-
 const Slot = ({ slot }) => {
   const [max, setMax] = useState(3)
   const [userSlots, setUserSlots] = useState([])
@@ -53,10 +25,23 @@ const Slot = ({ slot }) => {
     load()
   }, [])
 
+  const getDate = () => {
+    const date = new Date(slot.openAt)
+
+    console.log(date)
+
+    const temp = `${date.getDate()}.${date.getMonth() + 1}.${date
+      .getFullYear()
+      .toString()
+      .substr(2, 2)}`
+
+    return temp
+  }
+
   return (
     <article className="slot">
       <h2 className="underline slotItem">Luke {slot.order}</h2>
-      <p className="slotItem">Tilgjengelig fra: </p>
+      <p className="slotItem">Tilgjengelig fra: {getDate()}</p>
       <div className="slotItem">
         <button
           className="underline adminUserSlot"
