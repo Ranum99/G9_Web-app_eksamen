@@ -1,10 +1,10 @@
-const SlotUserEntery = ({ user }) => {
+const SlotUserEntery = ({ user, counter }) => {
   const date = Date(user.createdAt)
 
   console.log(user.user.username)
   return (
     <tr>
-      <td>{user.id}</td>
+      <td>{counter + 1}</td>
       <td>{user.user.username}</td>
       <td>{date}</td>
       <td>{user.coupon}</td>

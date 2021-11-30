@@ -13,7 +13,9 @@ const SlotUsers = ({ max, users }) => {
       </thead>
       <tbody id="tableBody">
         {users
-          ? users.map((user) => <SlotUserEntery key={user.id} user={user} />)
+          ? users.map((user, index) => (
+              <SlotUserEntery key={user.id} user={user} counter={index} />
+            ))
           : 'Ingen har deltatt denne luken'}
       </tbody>
     </table>
