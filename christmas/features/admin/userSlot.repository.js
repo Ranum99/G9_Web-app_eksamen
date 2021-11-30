@@ -7,6 +7,9 @@ export const getUserSlots = async (id) => {
       where: {
         slotId: Number(id),
       },
+      include: {
+        user: true,
+      },
     })
 
     // TODO: Returnere en feil dersom det ikke finnes userSlots med rett ID

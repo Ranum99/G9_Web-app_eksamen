@@ -1,13 +1,12 @@
 const SlotUserEntery = ({ user }) => {
-  const date = user.created_at
+  const date = Date(user.createdAt)
 
+  console.log(user.user.username)
   return (
     <tr>
       <td>{user.id}</td>
-      <td>{user.username}</td>
-      <td>
-        {date.getDay()}.{date.getMonth()}.{date.getFullYear()}
-      </td>
+      <td>{user.user.username}</td>
+      <td>{date}</td>
       <td>{user.coupon}</td>
     </tr>
   )
