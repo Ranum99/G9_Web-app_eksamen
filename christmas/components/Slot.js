@@ -31,23 +31,18 @@ const users = [
 
 const Slot = ({ slot }) => {
   const [max, setMax] = useState(3)
-  const [userSlots, setUserSlots] = useState()
+  const [userSlots, setUserSlots] = useState([])
 
   const loadUserSlots = async () => {
-    console.log('Fetcher')
     const response = await fetch('api/admin/userSlots?id=' + slot.id)
 
     const data = await response.json()
-
-    console.log(data)
 
     if (!data.success) {
       console.log('Feilet med ID ' + slot)
     }
 
     setUserSlots(data.data)
-    console.log('userSlots')
-    console.log(userSlots)
   }
 
   const load = async () => {
@@ -63,10 +58,14 @@ const Slot = ({ slot }) => {
       <h2 className="underline slotItem">Luke {slot.order}</h2>
       <p className="slotItem"></p>
       <div className="slotItem">
-        <p className="underline"> Se alle deltakere ({users.length})</p>
+        <p className="underline"> Se alle deltakere ({userSlots.length})</p>
         <p className="underline">Trekk superbonus</p>
       </div>
-      <SlotUsers max={max} users={userSlots} />
+      {userSlots.length == 0 ? (
+        <p>Ingen har deltatt på denne luken enda :/</p>
+      ) : (
+        <SlotUsers max={max} users={userSlots} />
+      )}
     </article>
   )
 }

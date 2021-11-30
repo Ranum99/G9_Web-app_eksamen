@@ -1,7 +1,6 @@
 const SlotUserEntery = ({ user, counter }) => {
   const date = Date(user.createdAt)
 
-  console.log(user.user.username)
   return (
     <tr>
       <td>{counter + 1}</td>
