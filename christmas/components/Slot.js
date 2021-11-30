@@ -56,10 +56,15 @@ const Slot = ({ slot }) => {
   return (
     <article className="slot">
       <h2 className="underline slotItem">Luke {slot.order}</h2>
-      <p className="slotItem"></p>
+      <p className="slotItem">Tilgjengelig fra: </p>
       <div className="slotItem">
-        <p className="underline"> Se alle deltakere ({userSlots.length})</p>
-        <p className="underline">Trekk superbonus</p>
+        <button
+          className="underline adminUserSlot"
+          onClick={() => setMax(userSlots.length)}
+        >
+          Se alle deltakere ({userSlots.length})
+        </button>
+        <button className="underline adminUserSlot">Trekk superbonus</button>
       </div>
       {userSlots.length == 0 ? (
         <p>Ingen har deltatt på denne luken enda :/</p>
