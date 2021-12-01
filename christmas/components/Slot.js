@@ -1,7 +1,7 @@
 import { createElement, useEffect, useState } from 'react'
 import SlotUsers from './SlotUsers'
 
-const Slot = ({ slot }) => {
+const Slot = ({ slot, displayWinner }) => {
   const [max, setMax] = useState(3)
   const [userSlots, setUserSlots] = useState([])
 
@@ -25,10 +25,20 @@ const Slot = ({ slot }) => {
     load()
   }, [])
 
+  const drawSuperBonus = () => {
+    if (userSlots.length == 0) {
+      alert('Ingen har deltatt på denna luka ennå')
+      return
+    }
+
+    const winnerIndex = Math.floor(Math.random() * userSlots.length)
+    const winner = userSlots[winnerIndex]
+
+    displayWinner(winner)
+  }
+
   const getDate = () => {
     const date = new Date(slot.openAt)
-
-    console.log(date)
 
     const temp = `${date.getDate()}.${date.getMonth() + 1}.${date
       .getFullYear()
@@ -49,7 +59,9 @@ const Slot = ({ slot }) => {
         >
           Se alle deltakere ({userSlots.length})
         </button>
-        <button className="underline adminUserSlot">Trekk superbonus</button>
+        <button className="underline adminUserSlot" onClick={drawSuperBonus}>
+          Trekk superbonus
+        </button>
       </div>
       {userSlots.length == 0 ? (
         <p>Ingen har deltatt på denne luken enda :/</p>

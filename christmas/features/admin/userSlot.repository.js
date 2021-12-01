@@ -9,6 +9,7 @@ export const getUserSlots = async (id) => {
       },
       include: {
         user: true,
+        slot: true,
       },
     })
 

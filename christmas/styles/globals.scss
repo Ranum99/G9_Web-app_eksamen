@@ -58,6 +58,10 @@ article {
 	text-decoration: underline;
 }
 
+.center {
+	text-align: center;
+}
+
 .slot {
 	display: flex;
 	flex-direction: column;
@@ -99,4 +103,33 @@ article {
 	cursor: pointer;
 	margin-right: 15px;
 	padding: 0px;
+}
+
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255, 255, 255, 0.5);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.close {
+	color: red;
+	float:right
+}
+
+.winner {
+	border: 1px solid black;
+	font-size: 25px;
+}
+
+.modalBox {
+	background-color: white;
+	border: 1px solid gray;
+	margin: 100px;
+	padding: 20px;
 }
