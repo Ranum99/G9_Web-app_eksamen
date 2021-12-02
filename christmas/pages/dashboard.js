@@ -1,8 +1,10 @@
 import Slot from '@/components/Slot'
 import SlotList from '@/components/SlotList'
+import { userInfo } from '@/lib/utils/user'
 import { useEffect, useState } from 'react'
 
 const admin = () => {
+  const [admin, setAdmin] = useState(false)
   const [calendar, setCalendar] = useState({
     id: 0,
     name: 'Ikke lasta fra DB',
@@ -10,15 +12,26 @@ const admin = () => {
     slot: [],
   })
 
-  const load = async () => {
+  const loadCalendar = async () => {
     const response = await fetch('api/calenders?name=Julekalender')
 
     const data = await response.json()
 
-    // TODO: Endre til
     data.success
       ? setCalendar(data.data)
       : console.log('Feil ved inllasting av data fra DB')
+  }
+
+  const loadUser = async () => {
+    const response = await userInfo()
+    console.log(response)
+    console.log(response.admin)
+    setAdmin(response.admin)
+  }
+
+  const load = () => {
+    loadUser()
+    loadCalendar()
   }
 
   useEffect(() => {
@@ -28,7 +41,11 @@ const admin = () => {
   return (
     <>
       <h1>Admin</h1>
-      <SlotList slots={calendar.slot} />
+      {admin ? (
+        <SlotList slots={calendar.slot} />
+      ) : (
+        <p>Du har ikke tilgang til å se innholdet</p>
+      )}
     </>
   )
 }
