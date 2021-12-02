@@ -24,8 +24,6 @@ const admin = () => {
 
   const loadUser = async () => {
     const response = await userInfo()
-    console.log(response)
-    console.log(response.admin)
     setAdmin(response.admin)
   }
 
