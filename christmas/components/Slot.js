@@ -1,3 +1,4 @@
+import { displayDate } from '@/lib/utils/displayDate'
 import { createElement, useEffect, useState } from 'react'
 import SlotUsers from './SlotUsers'
 
@@ -37,21 +38,12 @@ const Slot = ({ slot, displayWinner }) => {
     displayWinner(winner)
   }
 
-  const getDate = () => {
-    const date = new Date(slot.openAt)
-
-    const temp = `${date.getDate()}.${date.getMonth() + 1}.${date
-      .getFullYear()
-      .toString()
-      .substr(2, 2)}`
-
-    return temp
-  }
-
   return (
     <article className="slot">
       <h2 className="underline slotItem">Luke {slot.order}</h2>
-      <p className="slotItem">Tilgjengelig fra: {getDate()}</p>
+      <p className="slotItem">
+        Tilgjengelig fra: {displayDate(new Date(slot.openAt))}
+      </p>
       <div className="slotItem">
         <button
           className="underline adminUserSlot"
