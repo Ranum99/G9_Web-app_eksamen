@@ -50,8 +50,12 @@ article {
 	background-color: whitesmoke;
 }
 
-.active {
+.opened {
 	background-color: #96E8C5;
+}
+
+.avalibale:hover {
+	cursor: pointer;
 }
 
 .underline {
