@@ -26,16 +26,22 @@ const Slot = ({ slot, displayWinner }) => {
     load()
   }, [])
 
-  const drawSuperBonus = () => {
+  const drawSuperBonus = async () => {
     if (userSlots.length == 0) {
       alert('Ingen har deltatt på denna luka ennå')
       return
     }
 
-    const winnerIndex = Math.floor(Math.random() * userSlots.length)
-    const winner = userSlots[winnerIndex]
+    const response = await fetch('api/admin/superbonus?id=' + slot.id)
 
-    displayWinner(winner)
+    const data = await response.json()
+
+    if (data.success) {
+      displayWinner(data.data)
+    } else {
+      alert('Noe gikk feil')
+      console.log(data.error)
+    }
   }
 
   return (

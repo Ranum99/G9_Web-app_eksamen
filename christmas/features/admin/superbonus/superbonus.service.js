@@ -13,7 +13,6 @@ export const drawSuperBonus = async (req, res, id) => {
   // TODO: Sjekke om en slot med rett ID finnes i kalenderen
 
   const response = await adminUserSlotRepo.getUserSlots(id)
-  console.log(response)
 
   if (response.data.length == 0) {
     return Result.failure('Ingen har detlatt på denne luka')

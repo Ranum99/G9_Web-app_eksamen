@@ -8,7 +8,6 @@ const SlotList = ({ slots }) => {
 
   const displayWinner = (winner) => {
     setUser(winner)
-    console.log(user)
     setShow(!show)
   }
 

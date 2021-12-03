@@ -1,5 +1,4 @@
 const Modal = ({ user, setShow }) => {
-  console.log(user)
   return (
     <div className="modal">
       <div className="modalBox">
