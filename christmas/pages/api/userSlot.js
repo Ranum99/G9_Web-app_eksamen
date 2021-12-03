@@ -1,22 +1,12 @@
 import * as userSlotController from '@/features/userSlot/userSlot.controller'
+import { ApiResponse } from '@/lib/api/apiResponse'
 
 export default async function handler(req, res) {
-  console.log('\n\n\n\n')
-
   switch (req.method.toLowerCase()) {
     case 'get':
       userSlotController.getUserSlot(req, res)
       break
-    case "delete":
-      // TODO: Slette meg når ferdig
-      userSlotController.clear(req, res)
-      break
     default:
-      res.status(405)
-      res.json({
-        success: false,
-        error: `${req.method} er ikke tillatt`,
-      })
-      res.end()
+      ApiResponse(res).notAllowed()
   }
 }

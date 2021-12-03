@@ -22,7 +22,7 @@ export default function Home() {
       <h1>Julekalender eksamen 2021</h1>
       {admin && (
         <Link href="/dashboard">
-          <a>Gå til admin siden</a>
+          <a>Gå til admin siden </a>
         </Link>
       )}
       <CalendarList />

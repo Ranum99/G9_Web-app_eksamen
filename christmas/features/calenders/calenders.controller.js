@@ -7,34 +7,6 @@ export const getCalenders = async (req, res, name) => {
 
   if (!calendar?.success) {
     return ApiResponse(res).badRequest(calendar.error)
-  } else {
-    const calender = await prisma.calender.findFirst({
-      where: {
-        name,
-      },
-      include: {
-        slot: true,
-      },
-    })
-
-    return ApiResponse(res).ok(calender)
   }
+  return ApiResponse(res).ok(calendar.data)
 }
-
-/*
-if (!calendar?.success) {
-  return res.status(400).json(calendar)
-} else {
-  const calender = await prisma.calender.findMany({
-    where: {
-      name,
-    },
-    include: {
-      slot: true,
-    },
-  })
-
-  res.status(200).json({ success: true, data: calender })
-}
-}
-*/

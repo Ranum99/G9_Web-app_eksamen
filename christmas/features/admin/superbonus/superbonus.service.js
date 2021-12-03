@@ -1,5 +1,6 @@
 import { Result } from '@/lib/api/result'
 import * as adminUserSlotRepo from '@/features/admin/userSlot.repository'
+import * as slotRepo from '@/features/slots/slots.repository'
 
 export const drawSuperBonus = async (req, res, id) => {
   if (!Number(id)) {
@@ -10,7 +11,11 @@ export const drawSuperBonus = async (req, res, id) => {
     return Result.failure('ID må være større enn 0')
   }
 
-  // TODO: Sjekke om en slot med rett ID finnes i kalenderen
+  const exsist = await slotRepo.exsistSingleSlot(Number(id))
+
+  if (exsist.success == false && exsist?.type == 'Slot.NotFound') {
+    return Result.failure('Ingen slot med ID')
+  }
 
   const response = await adminUserSlotRepo.getUserSlots(id)
 

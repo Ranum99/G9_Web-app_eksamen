@@ -1,5 +1,6 @@
 import prisma from '@/lib/clients/db'
 import * as calenderController from '@/features/calenders/calenders.controller'
+import { ApiResponse } from '@/lib/api/apiResponse'
 
 export default async function handler(req, res) {
   const { name } = req.query
@@ -9,10 +10,6 @@ export default async function handler(req, res) {
   }
   //could also just use 404 i guess
   else {
-    // TODO: Bruke api/result
-    res.status(405).json({
-      success: false,
-      error: 'Method not allowed',
-    })
+    ApiResponse(res).notAllowed()
   }
 }

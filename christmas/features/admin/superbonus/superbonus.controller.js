@@ -2,8 +2,13 @@ import { ApiResponse } from '@/lib/api/apiResponse'
 import * as superbonusService from '@/features/admin/superbonus/superbonus.service'
 
 export const drawSuperBonus = async (req, res, id) => {
-  // TODO: sjekke om bruker er admin
-  // 401
+  // userInfo() fungerer ikke, returnerer { user: null, admin: false }. Dvs at den ikke finner cookies
+
+  const user = req.cookies
+  if (!user.admin) {
+    ApiResponse(res).unauthorized()
+    return
+  }
 
   if (!id) {
     ApiResponse(res).badRequest('ID mangler')

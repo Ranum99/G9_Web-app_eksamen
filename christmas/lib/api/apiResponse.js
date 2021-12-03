@@ -33,4 +33,9 @@ export const ApiResponse = (res) => ({
   notAllowed: () => {
     return res.status(200).json({ success: false, error: 'Method not allowed' })
   },
+  unauthorized: () => {
+    return res
+      .status(401)
+      .json({ success: false, error: 'Du har ikke rettigheter til dette' })
+  },
 })

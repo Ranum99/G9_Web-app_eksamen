@@ -6,7 +6,6 @@ import error from 'next/error'
 export const exsist = async (id) => {
   try {
     id = Number(id)
-    console.log(typeof id + id)
     const calender = await prisma.slot.findMany({
       where: {
         calender: {

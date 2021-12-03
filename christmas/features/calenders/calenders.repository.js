@@ -1,9 +1,6 @@
 import { PrismaErrors } from '@/lib/api/errors'
 import { Result } from '@/lib/api/result'
 import prisma from '@/lib/clients/db'
-//import error from 'next/error'
-
-//unsure what next/error import are used for tbh
 
 export const doeNotexsist = async (name) => {
   try {

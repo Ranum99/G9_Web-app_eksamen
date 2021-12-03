@@ -13,7 +13,6 @@ export const getUserSlots = async (id) => {
       },
     })
 
-    // TODO: Returnere en feil dersom det ikke finnes userSlots med rett ID
     return Result.success(userSlots)
   } catch (error) {
     return Result.failure(error)

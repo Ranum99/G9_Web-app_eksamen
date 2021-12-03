@@ -1,13 +1,11 @@
 import prisma from '@/lib/clients/db'
 import * as userController from '@/features/users/users.controller'
+import { ApiResponse } from '@/lib/api/apiResponse'
 
 export default async function handler(req, res) {
   if (req.method.toLowerCase() === 'get') {
     const users = await userController.getUsers(req, res)
   } else {
-    return res
-      .status(405)
-      .json({ success: false, error: 'Bruk en annen HTTP metode' })
-      .end()
+    ApiResponse(res).notAllowed()
   }
 }
