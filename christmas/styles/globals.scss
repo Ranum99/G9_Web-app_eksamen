@@ -52,6 +52,7 @@ article {
 
 .opened {
 	background-color: #96E8C5;
+	animation: openSlot 2s ease-in;
 }
 
 .avalibale:hover {
@@ -136,4 +137,29 @@ article {
 	border: 1px solid gray;
 	margin: 100px;
 	padding: 20px;
+}
+
+@keyframes openSlot {
+	0% {
+		background-color: white;
+	}
+	100% {
+		background-color: #96E8C5;
+	}
+}
+
+.animateUnavalibale {
+	animation: unavalibaleAnimation 2s ease-out;
+}
+
+@keyframes unavalibaleAnimation {
+	0% {
+		background-color: lightgray;
+	}
+	50% {
+		background-color: red;
+	}
+	100% {
+		background-color: lightgray;
+	}
 }

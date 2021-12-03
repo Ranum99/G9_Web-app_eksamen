@@ -13,7 +13,8 @@ const CalendarCard = ({ number, openAt, id }) => {
   slotDay.setHours(0, 0, 0, 0)
 
   const getCoupon = async () => {
-    if (type == 'notAvalibalie') {
+    if (type == 'notAvalibalie' || type == 'notAvalibalie animateUnavalibale') {
+      setType(`notAvalibalie animateUnavalibale`)
       alert('Luken er ikke åpen enda')
       return
     }
@@ -21,7 +22,7 @@ const CalendarCard = ({ number, openAt, id }) => {
     const user = await userInfo()
 
     const response = await fetch(
-      '/api/userSlot?slotId=' + id + '&userId=' + user.user.id
+      `/api/userSlot?slotId=${id}&userId=${user.user.id}`
     )
     const data = await response.json()
     setType('opened')
@@ -37,7 +38,8 @@ const CalendarCard = ({ number, openAt, id }) => {
   return (
     <article className=".center" className={type} onClick={() => getCoupon()}>
       <h2>{number}</h2>
-      {type == 'notAvalibalie' &&
+      {(type == 'notAvalibalie' ||
+        type == 'notAvalibalie animateUnavalibale') &&
         'Åpner om ' + (slotDay - today) / 1000 / 60 / 60 / 24 + ' dager'}
       {coupon}
     </article>
