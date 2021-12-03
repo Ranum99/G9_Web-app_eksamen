@@ -7,9 +7,7 @@ export default async function handler(req, res) {
 
   if (req.method.toLowerCase() === 'get') {
     calenderController.getCalenders(req, res, name)
-  }
-  //could also just use 404 i guess
-  else {
+  } else {
     ApiResponse(res).notAllowed()
   }
 }

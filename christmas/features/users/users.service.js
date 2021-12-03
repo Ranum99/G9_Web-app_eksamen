@@ -8,20 +8,5 @@ export const getUsers = async () => {
     Result.failure(users.error)
   }
 
-  console.log(users)
   return Result.success(users.data)
 }
-
-/*
-    if (users.data == 0) {
-      return {
-        success: false,
-        error: 'Fant ingen brukere',
-      }
-    }
-    return users
-  } else {
-    return users
-  }
-}
-*/

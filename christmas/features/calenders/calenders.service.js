@@ -10,5 +10,7 @@ export const checkIfExsist = async (req, res, name = '') => {
 
   const calander = await calenderRepo.doeNotexsist(name)
 
+  console.log(calander)
+
   return calander
 }

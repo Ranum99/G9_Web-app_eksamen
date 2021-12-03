@@ -14,10 +14,10 @@ export const doeNotexsist = async (name) => {
     })
 
     if (calender == null) {
-      return Result.failure(PrismaErrors.read(calender, undefined, error))
+      return Result.failure('Fant ingen kalender')
     }
     return Result.success(calender)
   } catch (error) {
-    return Result.failure(PrismaErrors.read(calender, undefined, error))
+    return Result.failure(error)
   }
 }
