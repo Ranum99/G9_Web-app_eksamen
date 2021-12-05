@@ -1,10 +1,11 @@
-import * as slotscont from '@/features/slots/slots.controller'
+import * as slotsCont from '@/features/slots/slots.controller'
 
+it('get all usersr test'),
+  async () => {
+    console.log('test')
+    const result = await slotsCont.checkifExsist(request, response)
 
-describe ("get all usersr test"), () => {
-  const result = await slotsCont.checkifExsist(request, response);
+    console.log('Vikrer')
 
-
-  expect(result.statusCode).toBe(200)
-}
-
+    expect(result.statusCode).toBe(200)
+  }
