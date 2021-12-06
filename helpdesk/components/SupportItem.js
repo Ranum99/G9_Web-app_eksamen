@@ -50,7 +50,7 @@ const SupportItem = ({ item, endItem, getIssues }) => {
 
   return (
     <>
-      <li className="issue">
+      <li className="issue commonIssueComments">
         <div className="meta">
           <span>{item?.department?.name}</span>
           <span>{severityHigh ?? severityMedium ?? severityLow}</span>
@@ -67,12 +67,20 @@ const SupportItem = ({ item, endItem, getIssues }) => {
         <footer>
           <span>{`${date_format}.${month_format}.${year_format}`}</span>
           <div className="issue_actions">
-            <button type="button" onClick={seeComments}>
+            <button
+              type="button"
+              onClick={seeComments}
+              className={showComments ? 'active' : ''}
+            >
               {item?.comments?.length === 0
                 ? 'Ingen kommentarer'
                 : `Se kommentarer (${item?.comments?.length ?? 0})`}
             </button>
-            <button type="button" onClick={addComment}>
+            <button
+              type="button"
+              onClick={addComment}
+              className={showAddComment ? 'active' : ''}
+            >
               Legg til kommentar
             </button>
             {!item.isResolved && (

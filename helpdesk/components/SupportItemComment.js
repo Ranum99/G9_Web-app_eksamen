@@ -1,6 +1,6 @@
 const SupportItemComment = ({ comment, index }) => {
   return (
-    <li>
+    <li className="comment commonIssueComments">
       <p>Kommentar {index + 1}</p>
       <p>{comment?.comment}</p>
     </li>

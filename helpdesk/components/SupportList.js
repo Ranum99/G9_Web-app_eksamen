@@ -18,21 +18,30 @@ const departments = [
 const SupportList = ({ handleInputOnChange, issues, endItem, getIssues }) => {
   return (
     <section className="issues">
-      <h2>Henvendelser</h2>
-      <Dropdown
-        name="importance"
-        handleInputOnChange={handleInputOnChange}
-        options={importance}
-      />
-      <Dropdown
-        name="department"
-        handleInputOnChange={handleInputOnChange}
-        options={departments}
-      />
+      <header>
+        <h2>Henvendelser</h2>
+        <div>
+          <Dropdown
+            name="importance"
+            handleInputOnChange={handleInputOnChange}
+            options={importance}
+          />
+          <Dropdown
+            name="department"
+            handleInputOnChange={handleInputOnChange}
+            options={departments}
+          />
+        </div>
+      </header>
       <ul>
         {issues?.length !== 0 ? (
           issues?.map((issue) => (
-            <SupportItem key={issue.id} item={issue} endItem={endItem} getIssues={getIssues} />
+            <SupportItem
+              key={issue.id}
+              item={issue}
+              endItem={endItem}
+              getIssues={getIssues}
+            />
           ))
         ) : (
           <p>Ingen resultater</p>

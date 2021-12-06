@@ -21,11 +21,10 @@ export default function oneSupportElement() {
       // Prøver å hente en spesifik issue med id x
       const response = await axios.get(`../api/issues/${id}`)
 
-      if(response?.data?.success && response?.data?.data)
+      if (response?.data?.success && response?.data?.data)
         setSupportElement(response?.data?.data)
-      else
-        // Dersom id-en ikke finnes i db, blir det satt en error = true, og brukeren ser en 404 - error skjerm
-        setError(true)
+      // Dersom id-en ikke finnes i db, blir det satt en error = true, og brukeren ser en 404 - error skjerm
+      else setError(true)
     } catch (error) {
       alert(error)
     }
@@ -37,7 +36,7 @@ export default function oneSupportElement() {
       const response = await axios.patch(`../api/issues/${id}`)
 
       if (response.data.success) {
-        setSupportElement({...supportElement, isResolved: true})
+        setSupportElement({ ...supportElement, isResolved: true })
       } else {
         alert(response.data.error)
       }
@@ -48,22 +47,28 @@ export default function oneSupportElement() {
 
   useEffect(() => {
     // Bare for at den ikke skal hente dersom det ikke er en id
-    if(id) {
+    if (id) {
       getSuportElement()
     }
   }, [id])
 
-  if(error) {
+  if (error) {
     return <ErrorPage statusCode="404" />
   }
 
   return (
     <>
       <Head>
-        <title>{`${supportElement?.isResolved ? '(Løst)' : ''} ${supportElement?.title}`}</title>
+        <title>{`${supportElement?.isResolved ? '(Løst)' : ''} ${
+          supportElement?.title
+        }`}</title>
       </Head>
       <Layout>
-        <SupportItem item={supportElement} endItem={endItem} getIssues={getSuportElement} />
+        <SupportItem
+          item={supportElement}
+          endItem={endItem}
+          getIssues={getSuportElement}
+        />
       </Layout>
     </>
   )

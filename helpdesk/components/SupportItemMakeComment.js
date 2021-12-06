@@ -11,18 +11,18 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
 
   const addComment = async () => {
     // Sjekker input
-    const commentCheck = validate.descriptionAndComment(comment, 'omment');
+    const commentCheck = validate.descriptionAndComment(comment, 'omment')
 
-    if(commentCheck.success) {
-      try { 
+    if (commentCheck.success) {
+      try {
         // Sender en post request til API
         const response = await axios.post(`../api/comments/${item.id}`, {
           comment: comment,
         })
-  
+
         if (response.data.success) {
           // Henter issuene på nytt, som vil oppdatere kommentarene med den man la til (og evt andre har lagt til)
-          getIssues();
+          getIssues()
           setComment('')
         } else {
           alert(response.data.error)
@@ -43,7 +43,7 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="commonIssueComments makeComment">
       <label>
         Legg til kommentar ({comment.length})
         <input
@@ -51,9 +51,10 @@ const SupportItemMakeComment = ({ item, getIssues }) => {
           name="comment"
           type="text"
           value={comment}
+          placeholder="Kommentar"
         />
-        <button type="submit">Send</button>
       </label>
+      <button type="submit">Send</button>
     </form>
   )
 }
