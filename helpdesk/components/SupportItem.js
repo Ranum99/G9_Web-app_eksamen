@@ -6,9 +6,9 @@ import SupportItemMakeComment from "./SupportItemMakeComment"
 
 /* eslint-disable no-ternary */
 const SupportItem = ({ item, endItem, getIssues }) => {
-  const severityHigh = item?.severity === 3 ? 'Høy' : null
-  const severityMedium = item?.severity === 2 ? 'Medium' : null
-  const severityLow = item?.severity === 1 ? 'Lav' : null
+  const severityHigh = item?.severity === 3 ? <span class= "severity" style={{color:"Red"}}>Høy ⬤</span> : null
+  const severityMedium = item?.severity === 2 ? <span class= "severity" style={{color:"Blue"}}>Medium ⬤</span> : null
+  const severityLow = item?.severity === 1 ? <span class= "severity" style={{color:"Grey"}}>Lav ⬤</span> : null
   
   // Henter datoen issuen ble laget, og henter deretter ut dag (dd), måned (mm) og år (__åå)
   const date = new Date(item?.created_at)
