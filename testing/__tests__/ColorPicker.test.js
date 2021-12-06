@@ -7,8 +7,6 @@ import ColorPicker from '../components/ColorPicker'
 import { shallow, mount } from 'enzyme'
 
 describe('ColorPicker', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
   it('should render a list of all colors passed to it', () => {
     const mockProps = {
       colors: ['red', 'blue', 'green'],
@@ -33,7 +31,6 @@ describe('ColorPicker', () => {
     let label = wrapper.find('[id="red"]').at(0)
     expect(label.prop('disabled')).toBe(true)
   })
-  it('should render a list of all colors passed to it', () => {})
   it('should have one active button if color match', () => {
     const mockProps = {
       colors: ['red', 'blue', 'green'],
@@ -42,15 +39,11 @@ describe('ColorPicker', () => {
       handleSelectedColor: jest.fn(),
     }
 
-  it('should have disabled button if color does not match', () => {})
-  it('should have one active button if color match', () => {})
     const wrapper = shallow(<ColorPicker {...mockProps} />)
     let label = wrapper.find('[id="blue"]').at(0)
     expect(label.prop('disabled')).toBe(false)
   })
 
-  it('should have called onClick on button', async () => {})
-  it('should not have called onClick on disabled button', async () => {})
   it('should have called onClick on button', async () => {
     const mockProps = {
       colors: ['red', 'blue', 'green'],
@@ -59,7 +52,6 @@ describe('ColorPicker', () => {
       handleSelectedColor: jest.fn(),
     }
 
-  it('should updated selectedColor and active buttons on click', async () => {})
     const wrapper = mount(<ColorPicker {...mockProps} />)
     wrapper.find('[id="blue"]').simulate('click')
     expect(mockProps.handleSelectedColor).toHaveBeenCalled()
