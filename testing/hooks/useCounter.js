@@ -1,15 +1,17 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
-export function useCounter() {
-  const [counter, setCounter] = useState(1)
+export const useCounter = (initialValue = 0) => {
+  const [counter, setCounter] = useState(initialValue)
 
-  const add = () => {
-    setCounter(counter + 1)
-  }
+  const add = useCallback((delta = 1) => setCounter(counter => counter + delta), [setCounter])
+  const substract = useCallback((delta = 1) => setCounter(counter => counter - delta), [setCounter])
 
-  const subtract = () => {
-    setCounter(counter - 1)
-  }
-
-  return { add, subtract }
+  return (
+    <>
+      Count: {counter}
+      {add, substract}
+    </>
+  )
 }
+
+
