@@ -13,3 +13,5 @@ const Stepper = () => {
     </>
   )
 }
+
+export default Stepper
