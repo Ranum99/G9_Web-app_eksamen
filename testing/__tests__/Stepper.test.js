@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-
 import React from 'react'
 import Stepper from '../components/Stepper'
 import { shallow } from 'enzyme'
@@ -13,8 +12,6 @@ beforeEach(() => {
 })
 
 describe('Stepper component', () => {
-  it('should render button', () => {})
-  it('should have correct text content on button', () => {})
   it('should render button', () => {
     expect(wrapper.find('button')).toHaveLength(1)
   })
@@ -28,11 +25,10 @@ describe('Stepper component', () => {
     expect(wrapper.text()).toEqual('End')
   })
 
-  it('should update step-count and button content on click', async () => {})
-  it('should remove button when step count is higher than amount of steps', async () => {})
   it('should remove button when step count is higher than amount of steps', async () => {
     wrapper.find('button').simulate('click')
     wrapper.find('button').simulate('click')
     expect(wrapper.find('button')).toHaveLength(0)
   })
 })
+
