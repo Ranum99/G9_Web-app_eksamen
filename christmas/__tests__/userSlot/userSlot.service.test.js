@@ -26,6 +26,7 @@ describe('create UserSlot', () => {
   describe('when given slotid and userid', () => {
     it('should respond with a true success', async () => {
       server.use(
+        // Skal egentlig være get, men da hentes ikke dataen ut av body
         rest.post(url, async (req, res, ctx) => {
           const { slotId, userId } = req.body
 
@@ -34,11 +35,44 @@ describe('create UserSlot', () => {
           return res(ctx.json(data))
         })
       )
+      // Skal egentlig være get, men da hentes ikke dataen ut av body
       const response = await axios.post(url, { slotId: 73, userId: 33 })
 
-      console.error('response')
-      console.error(response)
       expect(response.data.success).toBe(true)
+    })
+  })
+
+  describe('when ID is wrong', () => {
+    it('wrong slotId should give success = false', async () => {
+      server.use(
+        rest.post(url, async (req, res, ctx) => {
+          const { slotId, userId } = req.body
+
+          const data = await getUserSlot(slotId, userId)
+
+          return res(ctx.json(data))
+        })
+      )
+
+      const response = await axios.post(url, { slotId: 0, userId: 33 })
+
+      expect(response.data.success).toBe(false)
+    })
+
+    it('wrong userId should give success = false', async () => {
+      server.use(
+        rest.post(url, async (req, res, ctx) => {
+          const { slotId, userId } = req.body
+
+          const data = await getUserSlot(slotId, userId)
+
+          return res(ctx.json(data))
+        })
+      )
+
+      const response = await axios.post(url, { slotId: 73, userId: 3 })
+
+      expect(response.data.success).toBe(false)
     })
   })
 
