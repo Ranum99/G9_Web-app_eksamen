@@ -2,6 +2,7 @@
 import * as React from 'react'
 
 import { createRows } from '@/lib/utils'
+import axios from 'axios'
 
 const GameContext = React.createContext()
 
@@ -133,11 +134,18 @@ const GameProvider = ({ children }) => {
   React.useEffect(() => {
     const getCombination = async () => {
       // TODO: Må kalle api for å hente rett kombinasjon
+        // Ferdig, men usikker på om det skal lages en service osv.
+      try {
+        const response = await axios.get('../api/dummy')
 
-      dispatch({
-        type: 'set_combination',
-        payload: { game: null },
-      })
+        dispatch({
+          type: 'set_combination',
+          payload: { game: response.data.combination },
+        })
+        
+      } catch(error) {
+        console.log(error);
+      }
     }
 
     getCombination()

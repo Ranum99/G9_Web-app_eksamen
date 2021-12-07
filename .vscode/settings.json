@@ -27,5 +27,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "WillLuke.nextjs.hasPrompted": true,
-  "eslint.workingDirectories": ["./christmas"]
+  "eslint.workingDirectories": [
+    "./christmas"
+  ]
 }

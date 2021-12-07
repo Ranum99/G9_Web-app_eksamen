@@ -6,6 +6,7 @@ import ColorPicker from './ColorPicker'
 import Row from './Row'
 import Solution from './Solution'
 import { useGameContext } from '@/contexts/game-context'
+import axios from 'axios'
 
 const Rows = () => {
   const { state, dispatch } = useGameContext()
@@ -17,38 +18,41 @@ const Rows = () => {
     [state.currentRow]
   )
 
-  // TODO: Denne må skrives om og bo i en service
-
-  const getHints = () => {
-    return state.selectedColors?.reduce(
-      (hints, color, index) => {
-        if (color === state.game.combination[index]) {
-          hints.positions += 1
-        } else if (state.game.combination.includes(color)) {
-          hints.colors += 1
-        }
-
-        return hints
-      },
-      { positions: 0, colors: 0 }
-    )
-  }
-
-  // TODO: Skrives om til å kalle på api for å få hints som kan brukes til å oppdatere UI
-
   const handleRowSubmit = async (event) => {
     event.preventDefault()
-    const hints = getHints()
 
-    dispatch({ type: 'set_hints', payload: { hints } })
-    if (hints?.positions === 4) {
-      // TODO: Må lagre antall forsøk brukeren brukte på å løse oppgaven
+    try {
+      const hintsData = await axios.get('../api/hint', {
+        params: {
+          state: state
+        }
+      })
+      const hints = hintsData.data.data;
+      dispatch({ type: 'set_hints', payload: { hints } })
+      if (hints?.positions === 4) {
+        finishGame(true)
 
-      dispatch({ type: 'set_complete' })
-    } else {
-      // TODO: Må lagre at brukeren ikke klarte oppgaven når det ikke er flere forsøk igjen
-      dispatch({ type: 'increase_row' })
+        dispatch({ type: 'set_complete' })
+      } else {
+        if(state.currentRow === 9) {
+          finishGame(false)
+        }
+        dispatch({ type: 'increase_row' })
+      }
+    } catch(error) {
+      alert(error)
+      console.log(error);
     }
+  }
+
+  const finishGame = async (finished) => {
+    const game = await axios.post('../api/game', {
+      combination: state.selectedColors,
+      numberOfTries: state.currentRow,
+      foundCombination: finished
+    })
+    if(!game.data.success)
+      alert(game.data.error)
   }
 
   const handleCellClick = (event) => {
