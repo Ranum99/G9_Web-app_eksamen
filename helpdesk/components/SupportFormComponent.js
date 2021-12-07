@@ -9,7 +9,7 @@ export default function SupportFormComponent({ type, id, title, error, required,
             type='text'
             id={id}
             name={id}
-            required={required}
+            required={required ? 'true' : 'false'}
             onChange={handleInputOnChange}
             value={value}
           />
@@ -19,7 +19,7 @@ export default function SupportFormComponent({ type, id, title, error, required,
           type='text'
           id={id}
           name={id}
-          required={required}
+          required={required ? 'true' : 'false'}
           onChange={handleInputOnChange}
           value={value}
         />
