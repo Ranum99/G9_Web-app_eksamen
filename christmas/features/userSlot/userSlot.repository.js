@@ -4,7 +4,7 @@ import { Result } from '@/lib/api/result'
 
 const createCoupon = () => {
   // TODO: Fikse å lage en coupon
-	// TODO: Lage coupon mer tilfeldig
+  // TODO: Lage coupon mer tilfeldig
 
   let coupon = ''
 
@@ -37,13 +37,15 @@ const shuffle = (array) => {
     currentIndex--
 
     // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex], array[currentIndex]]
+    ;[array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ]
   }
 
-  let randomCode = ""
+  let randomCode = ''
 
-  array.forEach(element => randomCode += element)
+  array.forEach((element) => (randomCode += element))
 
   return randomCode
 }
@@ -59,8 +61,8 @@ export const create = async (slotId, userId) => {
       data: {
         coupon: coupon,
         createdAt: new Date(),
-        slotId:  Number(slotId),
-        userId: Number(userId)
+        slotId: Number(slotId),
+        userId: Number(userId),
       },
     })
 
@@ -73,7 +75,6 @@ export const create = async (slotId, userId) => {
 
 export const exist = async (slotId, userId) => {
   try {
-    // TODO: Bør være findUnique, men det går ikke for da må PK endres i DB
     // I DB er PK per nå en int som inkrementeres for hver oppføring
     const userSlot = await prisma.userSlot.findFirst({
       where: {
@@ -86,7 +87,6 @@ export const exist = async (slotId, userId) => {
       },
     })
 
-    // TODO: Er det egentlig success når det er vellykka men ingen finnes?
     // Bør være det, for det skjer ikke noe feil?
     if (!userSlot) {
       return Result.success(null)
@@ -102,7 +102,7 @@ export const exist = async (slotId, userId) => {
 export const clear = async () => {
   try {
     await prisma.userSlot.deleteMany({})
-    console.log("Fjernet alle userSlot")
+    console.log('Fjernet alle userSlot')
     return Result.success(null)
   } catch (error) {
     return Result.error(error)

@@ -5,32 +5,8 @@ import { UserSlotErrors } from './userSlot.error'
 
 import * as slotRepo from '@/features/slots/slots.repository'
 import * as usersRepo from '@/features/users/users.repository'
-/*
+
 export const getUserSlot = async (slotId, userId) => {
-  // Sjekker om bruker allerede har fått kode
-  const userSlot = await userSlotRepository.exist(slotId, userId)
-
-  if (!userSlot?.success) {
-    return Result.failure(userSlot.error)
-  }
-
-  if (userSlot.data) {
-    return Result.failure(UserSlotErrors(slotId, userId))
-  }
-
-  const createdUserSlot = await userSlotRepository.create(slotId, userId)
-
-  if (!createdUserSlot.success) {
-    Result.failure(createdUserSlot.error)
-  }
-  return Result.success(createdUserSlot.data)
-}
-*/
-export const getUserSlot = async (slotId, userId) => {
-  // Sjekker om data allerede finnes
-  // TODO: Legge til disse i repo filene
-
-  // Kommentert ut da dette er metoder som ikke finnes :/
   const slot = await slotRepo.exsistSingleSlot(slotId)
   const user = await usersRepo.exist(userId)
 
@@ -103,6 +79,6 @@ export const clear = async () => {
   if (!response.success) {
     return response
   } else {
-    return Result.success("Fjernet alle slots")
+    return Result.success('Fjernet alle slots')
   }
 }

@@ -10,8 +10,6 @@ export const getUserSlot = async (req, res) => {
 
   const userSlot = await userSlotService.getUserSlot(slotId, userId)
 
-  console.log(userSlot)
-
   if (!userSlot.success) {
     switch (userSlot?.type) {
       case 'User.NotFound':
@@ -28,62 +26,16 @@ export const getUserSlot = async (req, res) => {
       default:
         return ApiResponse(res).serverError
     }
+  } else {
+    return ApiResponse(res).ok(userSlot.data)
   }
-  res.status(201)  //created
-  res.json({ success: true, data: userSlot.data })
-  res.end()
 }
 
 export const clear = async (req, res) => {
   const response = await userSlotService.clear()
-  
-  if(!response.success){
+
+  if (!response.success) {
     return ApiResponse(res.clearedData)
   }
   return ApiResponse(res).ok()
 }
-
-/*
-
-export const getUserSlot = async (req, res) => {
-  const { slotId, userId } = req.query
-
-  console.log(slotId)
-  console.log(userId)
-
-  if (!slotId || !userId) {
-    return res.status(400).json({
-      success: false,
-      error: 'Mangler slotId og/eller userId',
-    })
-  }
-
-  const userSlot = await userSlotService.getUserSlot({
-    slotId,
-    userId,
-  })
-
-  if (!userSlot.success) {
-    switch (userSlot?.type) {
-      case 'User.NotExsist':
-        return res.status(404).json({
-          success: false,
-          error: userSlot.error,
-        })
-      case 'Slot.NotExsist':
-        return res.status(404).json({
-          success: false,
-          error: userSlot.error,
-        })
-      case 'UserSlot.Exist':
-        return res.status(409).json({
-          success: false,
-          error: userSlot.error,
-        })
-      default:
-        return res.status(500).json({
-          success: false,
-          error: userSlot.error,
-        })
-    }
-*/
