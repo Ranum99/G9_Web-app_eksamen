@@ -1,6 +1,15 @@
 /**
  * @jest-environment jsdom
  */
+import React from 'react'
+import Stepper from '../components/Stepper'
+import { shallow } from 'enzyme'
+
+let wrapper
+beforeEach(() => {
+  const stepsMock = [{ name: 'John' }, { name: 'Doe' }, { name: 'End' }]
+  wrapper = shallow(<Stepper steps={stepsMock} />)
+})
 
 import React from 'react'
 import Stepper from '../components/Stepper'
