@@ -1,17 +1,32 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable consistent-return */
 /* eslint-disable no-plusplus */
+
+
+/*TODO UPDATE SEED FOR
+    User UserSlot
+
+    Calander Slot
+    
+
+    UserSlot User
+
+    create use slot
+
+*/
 import { PrismaClient } from '@prisma/client'
 import * as faker from 'faker'
 
 const prisma = new PrismaClient()
 
 const createUser = async () => {
+  //Name variable gets used when creating a user
   const username = faker.name.firstName().toLowerCase()
 
   try {
     const user = await prisma.user.create({
       data: {
+        //name used here
         username,
       },
     })
@@ -22,15 +37,26 @@ const createUser = async () => {
   }
 }
 
+
+//list of users  is UserCount 
 const createUsers = async (userCount) => {
+
+  //list of users wil lbe gathered here 
   const userPromises = []
 
+  //lennght of the list of users 
   for (let i = 0; i < userCount; i++) {
+
+
+    //for each in the array createa aa new user
     const user = await createUser()
 
+
+    //adds it to the array after creating users 
     userPromises.push(user)
   }
 
+  //waits for userPromises to be finished
   await Promise.all(userPromises)
 }
 
@@ -59,6 +85,7 @@ const createSlot = async (id, order) => {
             id,
           },
         },
+        //new field
       },
     })
 
@@ -81,6 +108,8 @@ const createSlots = async (id, slotCount) => {
   await Promise.all(slotPromises)
 }
 
+
+
 const christmasCalender = async () =>
   prisma.calender.create({
     data: {
@@ -93,6 +122,7 @@ async function main() {
   await prisma.user.deleteMany({})
   await prisma.slot.deleteMany({})
   await prisma.calender.deleteMany({})
+  await prisma.UserSlot.deleteMany({})
   const calender = await christmasCalender()
 
   await createSlots(calender.id, 24)
@@ -108,3 +138,34 @@ main()
   .finally(async () => {
     await prisma.$disconnect()
   })
+
+
+
+  const createCalenderSlotwithUserAndSlot = async()=>{
+
+
+   // henter en user
+   const user = await prisma.user.findUnique({
+    where: {
+      username: 'test@test.no',
+    },
+  })
+
+    // henter en feed
+  const Slot = await prisma.slot.findUnique({
+    where: {
+      id: 'www.vg.no',
+    },
+  })
+   await prisma.UserSlot.create({
+    data: {
+      slot : {
+        connect: {id: slot.id},
+      },
+      user: {
+        connect: {id: user.id}
+      }
+    }
+   })
+
+  }

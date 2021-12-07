@@ -29,4 +29,137 @@ body {
   right: 25px;
 }
 
+main {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 
+article {
+	// Lager kanten
+	border: 1px solid lightgray;
+	border-radius: 10px;
+	padding: 50px;
+	margin: 5px;
+}
+
+.center {
+	text-align: center;
+}
+
+.notAvalibalie {
+	background-color: whitesmoke;
+}
+
+.opened {
+	background-color: #96E8C5;
+	animation: openSlot 2s ease-in;
+}
+
+.avalibale:hover {
+	cursor: pointer;
+}
+
+.underline {
+	text-decoration: underline;
+}
+
+.center {
+	text-align: center;
+}
+
+.slot {
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	justify-content: flex-start;
+}
+
+article > div {
+	display: flex;
+	flex-direction: row;
+	p {
+		margin-right: 25px;
+	}
+}
+
+.slotItem {
+	margin: 10px;
+	padding: 0;
+	border: 10px;
+	text-align: left;
+}
+
+tbody {
+	color: gray;
+}
+
+td {
+	width: 25%;
+}
+
+article {
+	text-align: center;
+}
+
+.adminUserSlot {
+	color: black;
+	background-color: white;
+	border: 0;
+	cursor: pointer;
+	margin-right: 15px;
+	padding: 0px;
+}
+
+.modal {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255, 255, 255, 0.5);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.close {
+	color: red;
+	float:right
+}
+
+.winner {
+	border: 1px solid black;
+	font-size: 25px;
+}
+
+.modalBox {
+	background-color: white;
+	border: 1px solid gray;
+	margin: 100px;
+	padding: 20px;
+}
+
+@keyframes openSlot {
+	0% {
+		background-color: white;
+	}
+	100% {
+		background-color: #96E8C5;
+	}
+}
+
+.animateUnavalibale {
+	animation: unavalibaleAnimation 2s ease-out;
+}
+
+@keyframes unavalibaleAnimation {
+	0% {
+		background-color: lightgray;
+	}
+	50% {
+		background-color: red;
+	}
+	100% {
+		background-color: lightgray;
+	}
+}

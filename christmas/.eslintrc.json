@@ -29,6 +29,7 @@
     }
   ],
   "rules": {
+    "linebreak-style": ["warn", "crlf"],
     "indent": 0,
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
