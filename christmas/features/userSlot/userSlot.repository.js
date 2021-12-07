@@ -3,9 +3,6 @@ import { PrismaErrors } from '@/lib/api/errors'
 import { Result } from '@/lib/api/result'
 
 const createCoupon = () => {
-  // TODO: Fikse å lage en coupon
-  // TODO: Lage coupon mer tilfeldig
-
   let coupon = ''
 
   coupon = Math.random().toString().substr(2, 4)
@@ -18,8 +15,6 @@ const createCoupon = () => {
 
   const holderArray = coupon.split('')
   coupon = shuffle(holderArray)
-
-  console.log(coupon)
 
   return coupon
 }
@@ -51,7 +46,6 @@ const shuffle = (array) => {
 }
 
 export const create = async (slotId, userId) => {
-  // Usikker på om dette virker
   try {
     const coupon = createCoupon()
 
@@ -75,7 +69,6 @@ export const create = async (slotId, userId) => {
 
 export const exist = async (slotId, userId) => {
   try {
-    // I DB er PK per nå en int som inkrementeres for hver oppføring
     const userSlot = await prisma.userSlot.findFirst({
       where: {
         slotId: {
@@ -87,7 +80,6 @@ export const exist = async (slotId, userId) => {
       },
     })
 
-    // Bør være det, for det skjer ikke noe feil?
     if (!userSlot) {
       return Result.success(null)
     }
@@ -102,7 +94,6 @@ export const exist = async (slotId, userId) => {
 export const clear = async () => {
   try {
     await prisma.userSlot.deleteMany({})
-    console.log('Fjernet alle userSlot')
     return Result.success(null)
   } catch (error) {
     return Result.error(error)

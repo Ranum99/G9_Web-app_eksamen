@@ -12,23 +12,8 @@ export const getUsers = async () => {
   }
 }
 
-/* OLD
-  return {
-      success: true,
-      data: users,
-    }
-  } catch (error) {
-    return {
-      success: false,
-      error: error,
-    }
-  }
-}
-*/
-
 export const exist = async (id) => {
   try {
-    // TODO: Burde vell vært findUnique ?
     const user = await prisma.user.findFirst({
       where: {
         id: {
