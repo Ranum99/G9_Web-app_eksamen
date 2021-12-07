@@ -2,32 +2,37 @@
  * @jest-environment jsdom
  */
 import React from 'react'
+import { fireEvent, render } from '@testing-library/react'
 import Stepper from '../components/Stepper'
-import { shallow } from 'enzyme'
-
-let wrapper
-beforeEach(() => {
-  const stepsMock = [{ name: 'John' }, { name: 'Doe' }, { name: 'End' }]
-  wrapper = shallow(<Stepper steps={stepsMock} />)
-})
 
 describe('Stepper component', () => {
+  beforeEach(() => {
+    render(<Stepper />)
+  })
+
   it('should render button', () => {
-    expect(wrapper.find('button')).toHaveLength(1)
+    const button = document.querySelector('button')
+    expect(button).toBeTruthy()
   })
 
   it('should have correct text content on button', () => {
-    expect(wrapper.text()).toEqual('Doe')
+    const button = document.querySelector('button')
+    expect(button).toHaveTextContent('Game')
   })
 
   it('should update step-count and button content on click', () => {
-    wrapper.find('button').simulate('click')
-    expect(wrapper.text()).toEqual('End')
+    const button = document.querySelector('button')
+    expect(button).toHaveTextContent('Game')
+    fireEvent.click(button)
+    expect(button).toHaveTextContent('End')
   })
 
   it('should remove button when step count is higher than amount of steps', async () => {
-    wrapper.find('button').simulate('click')
-    wrapper.find('button').simulate('click')
-    expect(wrapper.find('button')).toHaveLength(0)
+    const button = document.querySelector('button')
+    expect(button).toHaveTextContent('Game')
+    fireEvent.click(button)
+    expect(button).toHaveTextContent('End')
+    fireEvent.click(button)
+    expect(document.querySelector('button')).toBe(null)
   })
 })
