@@ -1,10 +1,10 @@
 # G9_Web-app_eksamen
 
 ## **Group Members**
-Aleksander Ranum
-Martina
-Jonathan
-Anders
+* Aleksander Ranum
+* Martina
+* Jonathan
+* Anders
 
 ## **Exam Description**
 The Web Applications exam at Høgskolen i Østfold in the fall of 2021 was a practical exam that tested students' abilities to create web applications using modern web development technologies. The exam consisted of four tasks, each of which involved creating or refactoring a specific feature of a web application. The tasks included:
