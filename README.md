@@ -1,7 +1,7 @@
 # G9_Web-app_eksamen
 
 ## **Group Members**
-* Aleksander Ranum
+* Aleksander Ranum (Ranum99)
 * Martina
 * Jonathan
 * Anders
